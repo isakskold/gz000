@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased flex flex-col relative min-h-screen overflow-x-hidden">
         <Header />
-        <main className="flex flex-grow px-[10%] pt-16 sm:pt-32 bg-[#005F99] h-full">
+        <main className="flex flex-grow px-[10%] pt-16 sm:pt-32 bg-gradient-to-br from-[#005F99] via-[#00A8E8] to-[#002F4B] h-full">
           {children}
         </main>
         <Footer />

@@ -1,3 +1,5 @@
+"use client";
+
 import {
   FaDiscord,
   FaTwitch,
@@ -5,7 +7,7 @@ import {
   FaSteam,
   FaEnvelope,
 } from "react-icons/fa";
-
+import Link from "next/link"; // Importing Link component for navigation
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import maxWidth from "@/const/maxWidth";
 
@@ -13,7 +15,7 @@ interface Props {}
 
 const Header: React.FC<Props> = () => {
   return (
-    <div className="fixed flex px-2 top-0 w-full h-16 sm:h-32 bg-black">
+    <div className="fixed flex px-2 top-0 w-full h-16 sm:h-32 bg-black z-50">
       {/* Header content */}
       <div
         className={`flex grow mx-auto justify-between items-center max-w-[${maxWidth}]`}
@@ -29,11 +31,20 @@ const Header: React.FC<Props> = () => {
 
         {/* Navbar */}
         <div className="hidden md:flex text-white gap-3.5 tracking-wider">
-          <p>Home</p>
-          <p>My Schedule</p>
-          <p>About Me</p>
-          <p>Contact</p>
+          <Link href="/" passHref>
+            <p className="cursor-pointer">Home</p>
+          </Link>
+          <Link href="/schedule" passHref>
+            <p className="cursor-pointer">My Schedule</p>
+          </Link>
+          <Link href="/about" passHref>
+            <p className="cursor-pointer">About Me</p>
+          </Link>
+          <Link href="/contact" passHref>
+            <p className="cursor-pointer">Contact</p>
+          </Link>
         </div>
+
         {/* Socials */}
         <div className="hidden md:flex text-white gap-7">
           <FaDiscord className="w-6 h-6 text-white" />
