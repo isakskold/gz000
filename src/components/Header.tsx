@@ -30,7 +30,7 @@ const Header: React.FC<Props> = () => {
         <Bars3Icon className="md:hidden w-auto h-8 sm:h-10 text-white" />
 
         {/* Navbar */}
-        <div className="hidden md:flex text-white gap-3.5 tracking-wider">
+        <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2  text-white gap-3.5 tracking-wider">
           <Link href="/" passHref>
             <p className="cursor-pointer">Home</p>
           </Link>
@@ -46,7 +46,7 @@ const Header: React.FC<Props> = () => {
         </div>
 
         {/* Socials */}
-        <div className="hidden md:flex text-white gap-7">
+        <div className="hidden md:flex text-white gap-3.5">
           <FaDiscord className="w-6 h-6 text-white" />
           <FaTwitch className="w-6 h-6 text-white" />
           <FaYoutube className="w-6 h-6 text-white" />
