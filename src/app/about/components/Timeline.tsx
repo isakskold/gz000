@@ -10,35 +10,30 @@ const Timeline: React.FC = () => {
   const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Sort the timelineItems by the date in ascending order (earliest first)
-  const sortedTimelineItems = [...timelineItems].sort((a, b) => {
-    return new Date(a.date).getTime() - new Date(b.date).getTime();
-  });
+  // Sort timelineItems by date ascending (earliest first)
+  const sortedTimelineItems = [...timelineItems].sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
 
-  // Function to automatically update the selected index
   const autoChangeIndex = () => {
     setSelectedIndex(
       (prevIndex) => (prevIndex + 1) % sortedTimelineItems.length
     );
   };
 
-  // Automatically change selected item every 10 seconds unless manually changed
   useEffect(() => {
-    if (manualSelectionRef.current) return; // Don't run if manually selected
-
+    if (manualSelectionRef.current) return;
     const intervalId = setInterval(() => {
       autoChangeIndex();
-    }, 4000); // Change every 10 seconds
-
-    return () => clearInterval(intervalId); // Cleanup on component unmount
+    }, 4000);
+    return () => clearInterval(intervalId);
   }, [manualSelectionRef.current]);
 
-  // Scroll the selected item into view relative to the container
   useEffect(() => {
     const item = itemsRef.current[selectedIndex];
     if (item) {
       item.scrollIntoView({
-        behavior: "smooth", // Scroll smoothly
+        behavior: "smooth",
         block: "nearest",
       });
     }
@@ -46,13 +41,13 @@ const Timeline: React.FC = () => {
 
   const handleItemClick = (index: number) => {
     setSelectedIndex(index);
-    manualSelectionRef.current = true; // Disable auto change when user manually selects an item
+    manualSelectionRef.current = true;
   };
 
   return (
     <div className="flex justify-between w-full">
       {/* Left Panel: Dynamic content */}
-      <div className="flex flex-col gap-8 justify-start max-w-1/2 p-6 rounded-lg shadow-2xl">
+      <div className="flex flex-col gap-8 justify-start max-w-1/2 max-h-[30vh] min-h-80 overflow-y-auto p-6 rounded-lg shadow-2xl">
         <h3 className="text-[clamp(1.5rem,0.625rem+1vw,2rem)] text-center">
           {sortedTimelineItems[selectedIndex].title}
         </h3>
@@ -61,22 +56,35 @@ const Timeline: React.FC = () => {
         </p>
       </div>
 
-      {/* Right Panel: Vertical list */}
-      <div
-        ref={containerRef}
-        className="flex flex-col gap-8 max-h-[30vh] min-h-80 px-11 py-3 overflow-y-auto  rounded-lg shadow-2xl "
-      >
-        {sortedTimelineItems.map((item, index) => (
-          <TimelineItemCard
-            ref={(el) => {
-              itemsRef.current[index] = el;
-            }}
-            key={index}
-            item={item}
-            selected={index === selectedIndex}
-            onClick={() => handleItemClick(index)} // Change selection on click
+      {/* Right Panel Wrapper */}
+      <div className="relative flex">
+        {/* Scrollable Timeline Items */}
+        <div
+          ref={containerRef}
+          className="flex flex-col gap-8 max-h-[30vh] min-h-80 px-11 py-3 overflow-y-auto rounded-lg shadow-2xl"
+        >
+          {sortedTimelineItems.map((item, index) => (
+            <TimelineItemCard
+              ref={(el) => {
+                itemsRef.current[index] = el;
+              }}
+              key={index}
+              item={item}
+              selected={index === selectedIndex}
+              onClick={() => handleItemClick(index)}
+            />
+          ))}
+        </div>
+
+        {/* Static Progress Bar */}
+        <div className="absolute right-[9px] top-0 bottom-0 w-2">
+          <div
+            key={selectedIndex}
+            className={`w-full bg-[#0077aa] rounded ${
+              manualSelectionRef.current ? "opacity-0" : "opacity-100"
+            } ${manualSelectionRef.current ? "" : "progress-bar-fill"}`}
           />
-        ))}
+        </div>
       </div>
     </div>
   );
