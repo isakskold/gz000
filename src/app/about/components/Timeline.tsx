@@ -31,11 +31,20 @@ const Timeline: React.FC = () => {
 
   useEffect(() => {
     const item = itemsRef.current[selectedIndex];
-    if (item) {
-      item.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-      });
+    const container = containerRef.current;
+    if (item && container) {
+      // Add a small delay to ensure smooth transition
+      setTimeout(() => {
+        const itemTop = item.offsetTop;
+        const itemHeight = item.offsetHeight;
+        const containerHeight = container.offsetHeight;
+        const targetScroll = itemTop - containerHeight / 2 + itemHeight / 2;
+
+        container.scrollTo({
+          top: targetScroll,
+          behavior: "smooth",
+        });
+      }, 100); // Small delay to ensure smooth transition
     }
   }, [selectedIndex]);
 
@@ -47,13 +56,15 @@ const Timeline: React.FC = () => {
   return (
     <div className="flex justify-between w-full">
       {/* Left Panel: Dynamic content */}
-      <div className="flex flex-col gap-8 justify-start max-w-1/2 max-h-[30vh] min-h-80 overflow-y-auto p-6 rounded-lg shadow-2xl">
-        <h3 className="text-[clamp(1.5rem,0.625rem+1vw,2rem)] text-center">
-          {sortedTimelineItems[selectedIndex].title}
-        </h3>
-        <p className="text-center text-[clamp(0.875rem,0.625rem+1vw,1.25rem)]">
-          {sortedTimelineItems[selectedIndex].info}
-        </p>
+      <div className="flex flex-col gap-8 justify-start max-w-1/2 max-h-[30vh] min-h-80 overflow-y-auto p-6 rounded-lg bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] shadow-lg border border-gray-700">
+        <div key={selectedIndex} className="animate-fade">
+          <h3 className="text-[clamp(1.5rem,0.625rem+1vw,2rem)] text-center font-oxanium text-stroke font-bold">
+            {sortedTimelineItems[selectedIndex].title}
+          </h3>
+          <p className="text-center text-[clamp(0.875rem,0.625rem+1vw,1.25rem)] font-rajdhani leading-relaxed">
+            {sortedTimelineItems[selectedIndex].info}
+          </p>
+        </div>
       </div>
 
       {/* Right Panel Wrapper */}
@@ -61,7 +72,7 @@ const Timeline: React.FC = () => {
         {/* Scrollable Timeline Items */}
         <div
           ref={containerRef}
-          className="flex flex-col gap-8 max-h-[30vh] min-h-80 px-11 py-3 overflow-y-auto rounded-lg shadow-2xl"
+          className="flex flex-col gap-8 max-h-[30vh] min-h-80 px-11 py-3 overflow-y-auto rounded-lg bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] shadow-lg border border-gray-700 scroll-smooth"
         >
           {sortedTimelineItems.map((item, index) => (
             <TimelineItemCard
@@ -80,7 +91,7 @@ const Timeline: React.FC = () => {
         <div className="absolute right-[9px] top-0 bottom-0 w-2">
           <div
             key={selectedIndex}
-            className={`w-full bg-[#0077aa] rounded ${
+            className={`w-full bg-[#00aaff] rounded ${
               manualSelectionRef.current ? "opacity-0" : "opacity-100"
             } ${manualSelectionRef.current ? "" : "progress-bar-fill"}`}
           />

@@ -8,19 +8,23 @@ interface Props {
 }
 
 const TimelineItemCard = forwardRef<HTMLDivElement, Props>(
-  ({ item: { title, date }, onClick, selected }, ref) => {
+  ({ item, onClick, selected }, ref) => {
     return (
       <div
         ref={ref}
-        className={`block cursor-pointer border rounded p-2 bg-black  ${
-          selected ? "translate-x-[-32px]" : ""
-        } transition-transform duration-300`}
         onClick={onClick}
+        className={`cursor-pointer transition-all duration-200 ${
+          selected
+            ? "scale-105 text-[#00aaff]"
+            : "text-gray-400 hover:text-white hover:scale-[1.02]"
+        }`}
       >
-        <span>{title}</span>
-        <span className="bg-[#0077aa] rounded py-1 block text-center">
-          {date}
-        </span>
+        <div className="flex flex-col items-center gap-1">
+          <div className="font-oxanium text-stroke font-bold text-lg">
+            {item.title}
+          </div>
+          <div className="font-rajdhani text-sm">{item.date}</div>
+        </div>
       </div>
     );
   }

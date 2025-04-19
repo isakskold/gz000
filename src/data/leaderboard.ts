@@ -1,64 +1,93 @@
+/**
+ * ===============================================
+ * Data Structure
+ * ===============================================
+ *
+ * LeaderboardPlayer Interface:
+ * - name: string    // Player's name
+ * - wins: number    // Number of wins
+ *
+ * ===============================================
+ * Usage
+ * ===============================================
+ *
+ * To add a new player:
+ * {
+ *   name: "PlayerName",
+ *   wins: 0
+ * }
+ *
+ * To update a player's wins:
+ * Modify the 'wins' value for the desired player
+ */
+
 // ╔══════════════════════════════════════════════════════════════════════════════╗
-// ║                               SCHEDULE DATA                                  ║
+// ║                             LEADERBOARD DATA                                 ║
 // ╚══════════════════════════════════════════════════════════════════════════════╝
 //
 // ┌──────────────────────────────────────────────────────────────────────────────┐
-// │                          HOW TO EDIT SCHEDULE DATA                           │
+// │                          HOW TO EDIT LEADERBOARD                             │
 // └──────────────────────────────────────────────────────────────────────────────┘
 //
-// Template:
+// Player template:
 // {
-//   day: "Day of Week",
-//   events: [
-//     {
-//       time: "HH:MM AM/PM",
-//       event: "Event Description"
-//     }
-//   ]
+//   name: "PlayerName",
+//   wins: 0
 // }
 //
 // ╔══════════════════════════════════════════════════════════════════════════════╗
 // ║                             IMPORTANT NOTES                                  ║
 // ╚══════════════════════════════════════════════════════════════════════════════╝
-// • Keep commas between days and events
-// • Keep square brackets [ ] around all days
+// • Keep commas between players
+// • Keep square brackets [ ] around all players
 // • All fields are required
-// • Use 12-hour format with AM/PM for times
-// • Days should be in order from Monday to Sunday
+// • Leaderboard is automatically sorted by wins
 // ───────────────────────────────────────────────────────────────────────────────
 
-import { ScheduleItem } from "@/types/schedule";
+interface LeaderboardPlayer {
+  name: string;
+  wins: number;
+}
 
-export const scheduleData: ScheduleItem[] = [
+export const leaderboardData: LeaderboardPlayer[] = [
   {
-    day: "Monday",
-    events: [
-      { time: "12:00 PM", event: "Stream Start" },
-      { time: "2:00 PM", event: "Q&A" },
-    ],
+    name: "GroundZero000",
+    wins: 42,
   },
   {
-    day: "Tuesday",
-    events: [{ time: "12:00 PM", event: "Stream Start" }],
+    name: "ProPlayer1",
+    wins: 38,
   },
   {
-    day: "Wednesday",
-    events: [{ time: "4:00 PM", event: "Casual Play" }],
+    name: "ChampionX",
+    wins: 35,
   },
   {
-    day: "Thursday",
-    events: [], // No events on Thursday
+    name: "EliteGamer",
+    wins: 32,
   },
   {
-    day: "Friday",
-    events: [{ time: "7:00 PM", event: "Special Stream" }],
+    name: "MasterPlayer",
+    wins: 30,
   },
   {
-    day: "Saturday",
-    events: [], // No events on Saturday
+    name: "SkillDemon",
+    wins: 28,
   },
   {
-    day: "Sunday",
-    events: [], // No events on Sunday
+    name: "VictoryKing",
+    wins: 25,
+  },
+  {
+    name: "BattleMaster",
+    wins: 22,
+  },
+  {
+    name: "WarriorPro",
+    wins: 20,
+  },
+  {
+    name: "DuelMaster",
+    wins: 18,
   },
 ];

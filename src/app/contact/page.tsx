@@ -11,7 +11,7 @@ const page: React.FC<Props> = () => {
       <PageHeader text="Contact Me" />
 
       <div
-        className={`flex flex-col mx-auto gap-11 justify-center w-full max-w-[${maxWidth}]`}
+        className={`flex flex-col mx-auto gap-11 justify-center w-full max-w-[800px]`}
       >
         {Object.keys(contactData).map((key, index) => (
           <div

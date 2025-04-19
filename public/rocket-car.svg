@@ -1,0 +1,29 @@
+<svg width="120" height="80" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Car body -->
+  <path d="M20 45 L35 45 L40 35 L80 35 L85 45 L100 45 L95 55 L25 55 Z" class="car-body" />
+  
+  <!-- Car top/roof -->
+  <path d="M45 35 L75 35 L70 25 L50 25 Z" class="car-top" />
+  
+  <!-- Windows -->
+  <path d="M48 34 L72 34 L68 27 L52 27 Z" fill="#111" opacity="0.9" />
+  
+  <!-- Front bumper -->
+  <path d="M85 45 L100 45 L98 50 L83 50 Z" class="car-accent" />
+  
+  <!-- Rear bumper -->
+  <path d="M20 45 L35 45 L33 50 L18 50 Z" class="car-accent" />
+  
+  <!-- Wheels -->
+  <circle cx="35" cy="55" r="8" fill="#333" />
+  <circle cx="85" cy="55" r="8" fill="#333" />
+  <circle cx="35" cy="55" r="4" fill="#222" />
+  <circle cx="85" cy="55" r="4" fill="#222" />
+  
+  <!-- Spoiler -->
+  <path d="M45 25 L55 25 L53 20 L47 20 Z" class="car-accent" />
+  
+  <!-- Boost -->
+  <path d="M15 47 L25 45 L20 50 L10 48 Z" class="boost-flame" fill="#ff4400" />
+  <path d="M10 46 L20 44 L15 51 L5 49 Z" class="boost-flame" fill="#ff8800" />
+</svg> 

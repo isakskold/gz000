@@ -1,64 +1,21 @@
 // ╔══════════════════════════════════════════════════════════════════════════════╗
-// ║                               SCHEDULE DATA                                  ║
+// ║                                BIO DATA                                      ║
 // ╚══════════════════════════════════════════════════════════════════════════════╝
 //
 // ┌──────────────────────────────────────────────────────────────────────────────┐
-// │                          HOW TO EDIT SCHEDULE DATA                           │
+// │                          HOW TO EDIT BIO DATA                                │
 // └──────────────────────────────────────────────────────────────────────────────┘
 //
-// Template:
-// {
-//   day: "Day of Week",
-//   events: [
-//     {
-//       time: "HH:MM AM/PM",
-//       event: "Event Description"
-//     }
-//   ]
-// }
+// To edit the bio text:
+// 1. Update the text in the bioText string below
+// 2. Use \n for line breaks
 //
 // ╔══════════════════════════════════════════════════════════════════════════════╗
 // ║                             IMPORTANT NOTES                                  ║
 // ╚══════════════════════════════════════════════════════════════════════════════╝
-// • Keep commas between days and events
-// • Keep square brackets [ ] around all days
-// • All fields are required
-// • Use 12-hour format with AM/PM for times
-// • Days should be in order from Monday to Sunday
+// • Keep the quotes around the text
+// • Line breaks (\n) will be preserved in the display
 // ───────────────────────────────────────────────────────────────────────────────
 
-import { ScheduleItem } from "@/types/schedule";
-
-export const scheduleData: ScheduleItem[] = [
-  {
-    day: "Monday",
-    events: [
-      { time: "12:00 PM", event: "Stream Start" },
-      { time: "2:00 PM", event: "Q&A" },
-    ],
-  },
-  {
-    day: "Tuesday",
-    events: [{ time: "12:00 PM", event: "Stream Start" }],
-  },
-  {
-    day: "Wednesday",
-    events: [{ time: "4:00 PM", event: "Casual Play" }],
-  },
-  {
-    day: "Thursday",
-    events: [], // No events on Thursday
-  },
-  {
-    day: "Friday",
-    events: [{ time: "7:00 PM", event: "Special Stream" }],
-  },
-  {
-    day: "Saturday",
-    events: [], // No events on Saturday
-  },
-  {
-    day: "Sunday",
-    events: [], // No events on Sunday
-  },
-];
+export const bioText =
+  "Welcome to my corner of the internet!\n\nI'm a passionate Rocket League content creator and tournament organizer. My journey in the gaming community started in 2022, and since then, I've been dedicated to creating exciting competitive events and engaging content for the Rocket League community.\n\nWhether it's organizing tournaments, hosting showmatches, or streaming gameplay, my goal is to bring players together and create memorable experiences.";
