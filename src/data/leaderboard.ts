@@ -1,3 +1,5 @@
+import { LeaderboardPlayer } from "@/types/leaderboard";
+
 // ╔══════════════════════════════════════════════════════════════════════════════╗
 // ║                             LEADERBOARD DATA                                 ║
 // ╚══════════════════════════════════════════════════════════════════════════════╝
@@ -20,11 +22,6 @@
 // • All fields are required
 // • Leaderboard is automatically sorted by wins
 // ───────────────────────────────────────────────────────────────────────────────
-
-export interface LeaderboardPlayer {
-  name: string;
-  wins: number;
-}
 
 export const leaderboardData: LeaderboardPlayer[] = [
   {
