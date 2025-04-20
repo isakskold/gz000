@@ -27,7 +27,7 @@ const Timeline: React.FC = () => {
       autoChangeIndex();
     }, 4000);
     return () => clearInterval(intervalId);
-  }, [manualSelectionRef.current]);
+  }, [autoChangeIndex]);
 
   useEffect(() => {
     const item = itemsRef.current[selectedIndex];

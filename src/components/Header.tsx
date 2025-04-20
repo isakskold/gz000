@@ -1,8 +1,7 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Link from "next/link";
-import maxWidth from "@/const/maxWidth";
+import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import {
@@ -34,9 +33,11 @@ const Header = () => {
         <div className="flex grow mx-auto justify-between items-center max-w-[1200px]">
           {/* Logo */}
           <Link href="/" onClick={handleLinkClick}>
-            <img
+            <Image
               src="/pngs/whiteLogo.png"
               alt="Logo"
+              width={80}
+              height={80}
               className="h-14 sm:h-16 md:h-20 w-auto hover:scale-105 transition-transform duration-200 cursor-pointer"
             />
           </Link>

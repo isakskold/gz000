@@ -2,7 +2,6 @@ import { events } from "@/data/events";
 import PageHeader from "@/components/PageHeader";
 import MatchEvent from "./components/MatchEvent";
 import TournamentEvent from "./components/TournamentEvent";
-import maxWidth from "@/const/maxWidth";
 
 type Event = {
   type: "tournament" | "showmatch";

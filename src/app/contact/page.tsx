@@ -1,9 +1,8 @@
 import ContactItem from "./ContactItem";
 import { contactData } from "@/data/contact";
-import maxWidth from "@/const/maxWidth";
 import PageHeader from "@/components/PageHeader";
 
-interface Props {}
+type Props = Record<string, never>;
 
 const page: React.FC<Props> = () => {
   return (
