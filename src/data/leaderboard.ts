@@ -21,7 +21,7 @@
 // • Leaderboard is automatically sorted by wins
 // ───────────────────────────────────────────────────────────────────────────────
 
-interface LeaderboardPlayer {
+export interface LeaderboardPlayer {
   name: string;
   wins: number;
 }
