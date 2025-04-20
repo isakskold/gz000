@@ -15,19 +15,20 @@ const Timeline: React.FC = () => {
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
   );
 
-  const autoChangeIndex = () => {
-    setSelectedIndex(
-      (prevIndex) => (prevIndex + 1) % sortedTimelineItems.length
-    );
-  };
-
   useEffect(() => {
     if (manualSelectionRef.current) return;
+
+    const autoChangeIndex = () => {
+      setSelectedIndex(
+        (prevIndex) => (prevIndex + 1) % sortedTimelineItems.length
+      );
+    };
+
     const intervalId = setInterval(() => {
       autoChangeIndex();
     }, 4000);
     return () => clearInterval(intervalId);
-  }, [autoChangeIndex]);
+  }, [sortedTimelineItems.length]);
 
   useEffect(() => {
     const item = itemsRef.current[selectedIndex];

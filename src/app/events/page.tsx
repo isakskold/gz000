@@ -2,27 +2,7 @@ import { events } from "@/data/events";
 import PageHeader from "@/components/PageHeader";
 import MatchEvent from "./components/MatchEvent";
 import TournamentEvent from "./components/TournamentEvent";
-
-type Event = {
-  type: "tournament" | "showmatch";
-  date: string;
-  time: string;
-  prizePool: number;
-} & (
-  | {
-      type: "tournament";
-      name: string;
-      maxParticipants: number;
-      open: boolean;
-    }
-  | {
-      type: "showmatch";
-      teams: {
-        name: string;
-        players: string[];
-      }[];
-    }
-);
+import { Event } from "@/types/events";
 
 const page: React.FC = () => {
   return (
