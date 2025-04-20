@@ -3,7 +3,7 @@ export interface ContactDataType {
   youtube: string;
   email: string;
   twitch: string;
-  steam: string;
+  twitter: string;
 }
 
 export interface ContactItem {

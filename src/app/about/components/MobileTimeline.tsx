@@ -20,11 +20,11 @@ const MobileTimeline: React.FC = () => {
           <div className="relative z-10">
             <div className="bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] p-6 rounded-lg shadow-lg border border-gray-700">
               <div className="flex flex-col gap-4">
-                <div className="flex justify-between items-center">
-                  <h3 className="font-oxanium text-stroke text-xl font-bold">
+                <div className="flex flex-wrap gap-4 justify-between items-start">
+                  <h3 className="font-oxanium text-[#00aaff] text-lg font-bold w-[220px] break-words">
                     {item.title}
                   </h3>
-                  <span className="font-rajdhani text-[#00aaff] text-sm">
+                  <span className="font-rajdhani text-[#00aaff] text-sm text-right">
                     {item.date}
                   </span>
                 </div>

@@ -10,7 +10,7 @@ const Page = () => {
     <div className="flex flex-col items-center w-full gap-12">
       <PageHeader text="1v1 Leaderboard" />
 
-      <div className="flex flex-col gap-4 w-full max-w-[800px]">
+      <div className="flex flex-col gap-[clamp(1rem,0.5rem+2vw,3rem)] w-full max-w-[800px]">
         {sortedPlayers.map((player, index) => (
           <div
             key={player.name}

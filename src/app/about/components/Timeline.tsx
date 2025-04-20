@@ -54,11 +54,11 @@ const Timeline: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-between w-full">
+    <div className="hidden md:flex justify-between w-full">
       {/* Left Panel: Dynamic content */}
       <div className="flex flex-col gap-8 justify-start max-w-1/2 max-h-[30vh] min-h-80 overflow-y-auto p-6 rounded-lg bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] shadow-lg border border-gray-700">
         <div key={selectedIndex} className="animate-fade">
-          <h3 className="text-[clamp(1.5rem,0.625rem+1vw,2rem)] text-center font-oxanium text-stroke font-bold">
+          <h3 className="text-[clamp(1.5rem,0.625rem+1vw,2rem)] text-[#00aaff] mb-4 text-center font-oxanium text-stroke font-bold">
             {sortedTimelineItems[selectedIndex].title}
           </h3>
           <p className="text-center text-[clamp(0.875rem,0.625rem+1vw,1.25rem)] font-rajdhani leading-relaxed">

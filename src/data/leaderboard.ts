@@ -1,26 +1,3 @@
-/**
- * ===============================================
- * Data Structure
- * ===============================================
- *
- * LeaderboardPlayer Interface:
- * - name: string    // Player's name
- * - wins: number    // Number of wins
- *
- * ===============================================
- * Usage
- * ===============================================
- *
- * To add a new player:
- * {
- *   name: "PlayerName",
- *   wins: 0
- * }
- *
- * To update a player's wins:
- * Modify the 'wins' value for the desired player
- */
-
 // ╔══════════════════════════════════════════════════════════════════════════════╗
 // ║                             LEADERBOARD DATA                                 ║
 // ╚══════════════════════════════════════════════════════════════════════════════╝

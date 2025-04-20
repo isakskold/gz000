@@ -17,6 +17,20 @@ body {
   );
 }
 
+/* Custom media query for large screens with sufficient height */
+@media (min-width: 1024px) and (min-height: 800px) {
+  .show-discord-button {
+    display: block !important;
+  }
+}
+
+/* Custom media query for viewport height */
+@media (min-height: 800px) {
+  .lg\:block {
+    display: block;
+  }
+}
+
 /* ===============================================
    3. Theme Variables (Custom Fonts)
 =============================================== */

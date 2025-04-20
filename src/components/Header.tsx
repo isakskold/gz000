@@ -1,22 +1,21 @@
 "use client";
 
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import maxWidth from "@/const/maxWidth";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
 import {
   FaDiscord,
   FaTwitch,
   FaYoutube,
-  FaSteam,
+  FaTwitter,
   FaEnvelope,
   FaBars,
+  FaTimes,
 } from "react-icons/fa";
-import Link from "next/link";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
-import maxWidth from "@/const/maxWidth";
-import { useState } from "react";
-import { usePathname } from "next/navigation";
 
-interface Props {}
-
-const Header: React.FC<Props> = () => {
+const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
@@ -31,11 +30,8 @@ const Header: React.FC<Props> = () => {
 
   return (
     <>
-      <div className="fixed flex px-2 top-0 w-full h-16 sm:h-32 bg-black/80 backdrop-blur-sm z-50 border-b border-gray-800">
-        {/* Header content */}
-        <div
-          className={`flex grow mx-auto justify-between items-center max-w-[${maxWidth}]`}
-        >
+      <div className="fixed flex px-2 top-0 w-full h-16 sm:h-32 bg-black/80 backdrop-blur-sm z-[9999] border-b border-gray-800">
+        <div className="flex grow mx-auto justify-between items-center max-w-[1200px]">
           {/* Logo */}
           <Link href="/" onClick={handleLinkClick}>
             <img
@@ -45,12 +41,17 @@ const Header: React.FC<Props> = () => {
             />
           </Link>
 
-          {/* Burger menu for small screens */}
+          {/* Toggle button for mobile menu */}
           <button
             onClick={toggleMobileMenu}
-            className="md:hidden w-auto h-8 sm:h-10 text-white hover:text-gray-300 transition-colors duration-200 z-50"
+            className="md:hidden w-auto h-8 sm:h-10 text-white hover:text-gray-300 transition-colors duration-200"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           >
-            <FaBars className="w-8 h-8" />
+            {isMobileMenuOpen ? (
+              <FaTimes className="w-8 h-8" />
+            ) : (
+              <FaBars className="w-8 h-8" />
+            )}
           </button>
 
           {/* Desktop Navbar */}
@@ -74,6 +75,15 @@ const Header: React.FC<Props> = () => {
               Events
             </Link>
             <Link
+              href="/leaderboard"
+              className={`cursor-pointer hover:text-gray-300 transition-colors duration-200 ${
+                pathname === "/leaderboard" ? "text-[#00aaff]" : ""
+              }`}
+              onClick={handleLinkClick}
+            >
+              Leaderboard
+            </Link>
+            <Link
               href="/about"
               className={`cursor-pointer hover:text-gray-300 transition-colors duration-200 ${
                 pathname === "/about" ? "text-[#00aaff]" : ""
@@ -90,15 +100,6 @@ const Header: React.FC<Props> = () => {
               onClick={handleLinkClick}
             >
               Contact
-            </Link>
-            <Link
-              href="/leaderboard"
-              className={`cursor-pointer hover:text-gray-300 transition-colors duration-200 ${
-                pathname === "/leaderboard" ? "text-[#00aaff]" : ""
-              }`}
-              onClick={handleLinkClick}
-            >
-              Leaderboard
             </Link>
           </div>
 
@@ -126,11 +127,11 @@ const Header: React.FC<Props> = () => {
               <FaYoutube className="w-6 h-6 text-white hover:text-gray-300 transition-colors duration-200" />
             </a>
             <a
-              href="https://steamcommunity.com/your-steam"
+              href="https://twitter.com/your-twitter"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaSteam className="w-6 h-6 text-white hover:text-gray-300 transition-colors duration-200" />
+              <FaTwitter className="w-6 h-6 text-white hover:text-gray-300 transition-colors duration-200" />
             </a>
             <a href="mailto:your-email@example.com">
               <FaEnvelope className="w-6 h-6 text-white hover:text-gray-300 transition-colors duration-200" />
@@ -141,7 +142,7 @@ const Header: React.FC<Props> = () => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 bg-black/90 backdrop-blur-md transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-black/90 backdrop-blur-md transition-opacity duration-300 z-[9998] ${
           isMobileMenuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
@@ -168,6 +169,15 @@ const Header: React.FC<Props> = () => {
               Events
             </Link>
             <Link
+              href="/leaderboard"
+              className={`cursor-pointer hover:text-gray-300 transition-colors duration-200 ${
+                pathname === "/leaderboard" ? "text-[#00aaff]" : ""
+              }`}
+              onClick={handleLinkClick}
+            >
+              Leaderboard
+            </Link>
+            <Link
               href="/about"
               className={`cursor-pointer hover:text-gray-300 transition-colors duration-200 ${
                 pathname === "/about" ? "text-[#00aaff]" : ""
@@ -184,15 +194,6 @@ const Header: React.FC<Props> = () => {
               onClick={handleLinkClick}
             >
               Contact
-            </Link>
-            <Link
-              href="/leaderboard"
-              className={`cursor-pointer hover:text-gray-300 transition-colors duration-200 ${
-                pathname === "/leaderboard" ? "text-[#00aaff]" : ""
-              }`}
-              onClick={handleLinkClick}
-            >
-              Leaderboard
             </Link>
           </div>
 
@@ -219,11 +220,11 @@ const Header: React.FC<Props> = () => {
               <FaYoutube className="w-8 h-8 text-white hover:text-gray-300 transition-colors duration-200" />
             </a>
             <a
-              href="https://steamcommunity.com/your-steam"
+              href="https://twitter.com/your-twitter"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaSteam className="w-8 h-8 text-white hover:text-gray-300 transition-colors duration-200" />
+              <FaTwitter className="w-8 h-8 text-white hover:text-gray-300 transition-colors duration-200" />
             </a>
             <a href="mailto:your-email@example.com">
               <FaEnvelope className="w-8 h-8 text-white hover:text-gray-300 transition-colors duration-200" />

@@ -2,7 +2,7 @@ import {
   FaDiscord,
   FaTwitch,
   FaYoutube,
-  FaSteam,
+  FaTwitter,
   FaEnvelope,
 } from "react-icons/fa";
 
@@ -43,12 +43,12 @@ const Footer = () => {
             <FaYoutube className="w-6 h-6" />
           </a>
           <a
-            href="https://steamcommunity.com/your-steam"
+            href="https://twitter.com/your-twitter"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-400 hover:text-[#00aaff] transition-colors duration-200"
           >
-            <FaSteam className="w-6 h-6" />
+            <FaTwitter className="w-6 h-6" />
           </a>
           <a
             href="mailto:your-email@example.com"

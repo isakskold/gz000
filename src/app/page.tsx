@@ -1,4 +1,5 @@
 import maxWidth from "@/const/maxWidth";
+import DiscordButton from "@/components/DiscordButton";
 
 interface Props {}
 
@@ -30,6 +31,11 @@ const page: React.FC<Props> = () => {
             Welcome to my website!
           </h2>
         </div>
+      </div>
+
+      {/* Discord Button */}
+      <div className="mt-12">
+        <DiscordButton />
       </div>
     </div>
   );

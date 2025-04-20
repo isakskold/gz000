@@ -7,7 +7,7 @@ interface Props {}
 
 const page: React.FC<Props> = () => {
   return (
-    <div className="flex w-full flex-col items-center gap-12">
+    <div className="flex w-full flex-col items-center gap-12 relative z-0">
       <PageHeader text="Contact Me" />
 
       <div

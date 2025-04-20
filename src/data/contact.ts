@@ -12,7 +12,7 @@
 //   youtube: "https://www.youtube.com/channel/yourChannel",
 //   email: "your-email@example.com",
 //   twitch: "https://www.twitch.tv/yourChannel",
-//   steam: "https://steamcommunity.com/id/yourID",
+//   twitter: "https://twitter.com/yourUsername",
 // }
 //
 // ╔══════════════════════════════════════════════════════════════════════════════╗
@@ -30,5 +30,5 @@ export const contactData: ContactDataType = {
   youtube: "https://www.youtube.com/channel/yourChannel",
   email: "your-email@example.com",
   twitch: "https://www.twitch.tv/GroundZero000",
-  steam: "https://steamcommunity.com/id/GroundZero000",
+  twitter: "https://twitter.com/GroundZero000",
 };
