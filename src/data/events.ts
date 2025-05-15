@@ -15,6 +15,7 @@
 //   time: "HH:MM",
 //   prizePool: 500,
 //   maxParticipants: 32,
+//   url: "https://challengermode.com/tournaments/123",
 // }
 //
 // 1v1 template:
