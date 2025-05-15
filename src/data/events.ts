@@ -63,12 +63,15 @@
 // ╔══════════════════════════════════════════════════════════════════════════════╗
 // ║                             IMPORTANT NOTES                                  ║
 // ╚══════════════════════════════════════════════════════════════════════════════╝
+// • Specify event type in the "type" field. Use either "tournament" or "showmatch" based on which event type it should be
 // • Keep commas between events
 // • Keep square brackets [ ] around all events
 // • All fields are required
 // • Use YYYY-MM-DD for dates
 // • Use 24-hour format for times
 // • Team names only required for 3v3 matches
+// • URL for tournaments are optional. The link icon will be hidden if no URL is provided
+// • Prizepool value is displayed in dollars ($)
 // ───────────────────────────────────────────────────────────────────────────────
 
 import { Event } from "@/types/events";
