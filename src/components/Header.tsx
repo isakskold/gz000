@@ -8,11 +8,12 @@ import {
   FaDiscord,
   FaTwitch,
   FaYoutube,
-  FaTwitter,
   FaEnvelope,
   FaBars,
   FaTimes,
 } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { contactData } from "../data/contact";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -107,34 +108,36 @@ const Header = () => {
           {/* Desktop Socials */}
           <div className="hidden md:flex items-center gap-4">
             <a
-              href="https://discord.gg/your-discord"
+              href={`https://discord.com/users/${
+                contactData.discord.split("#")[0]
+              }`}
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaDiscord className="w-6 h-6 text-white hover:text-gray-300 transition-colors duration-200" />
             </a>
             <a
-              href="https://twitch.tv/your-twitch"
+              href={contactData.twitch}
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaTwitch className="w-6 h-6 text-white hover:text-gray-300 transition-colors duration-200" />
             </a>
             <a
-              href="https://youtube.com/your-youtube"
+              href={contactData.youtube}
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaYoutube className="w-6 h-6 text-white hover:text-gray-300 transition-colors duration-200" />
             </a>
             <a
-              href="https://twitter.com/your-twitter"
+              href={contactData.twitter}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaTwitter className="w-6 h-6 text-white hover:text-gray-300 transition-colors duration-200" />
+              <FaXTwitter className="w-6 h-6 text-white hover:text-gray-300 transition-colors duration-200" />
             </a>
-            <a href="mailto:your-email@example.com">
+            <a href={`mailto:${contactData.email}`}>
               <FaEnvelope className="w-6 h-6 text-white hover:text-gray-300 transition-colors duration-200" />
             </a>
           </div>
@@ -200,34 +203,36 @@ const Header = () => {
 
           <div className="flex gap-8 mt-8">
             <a
-              href="https://discord.gg/your-discord"
+              href={`https://discord.com/users/${
+                contactData.discord.split("#")[0]
+              }`}
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaDiscord className="w-8 h-8 text-white hover:text-gray-300 transition-colors duration-200" />
             </a>
             <a
-              href="https://twitch.tv/your-twitch"
+              href={contactData.twitch}
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaTwitch className="w-8 h-8 text-white hover:text-gray-300 transition-colors duration-200" />
             </a>
             <a
-              href="https://youtube.com/your-youtube"
+              href={contactData.youtube}
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaYoutube className="w-8 h-8 text-white hover:text-gray-300 transition-colors duration-200" />
             </a>
             <a
-              href="https://twitter.com/your-twitter"
+              href={contactData.twitter}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaTwitter className="w-8 h-8 text-white hover:text-gray-300 transition-colors duration-200" />
+              <FaXTwitter className="w-8 h-8 text-white hover:text-gray-300 transition-colors duration-200" />
             </a>
-            <a href="mailto:your-email@example.com">
+            <a href={`mailto:${contactData.email}`}>
               <FaEnvelope className="w-8 h-8 text-white hover:text-gray-300 transition-colors duration-200" />
             </a>
           </div>
