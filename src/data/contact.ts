@@ -26,9 +26,9 @@
 import { ContactDataType } from "@/types/contact";
 
 export const contactData: ContactDataType = {
-  discord: "GroundZero000#1234",
+  discord: "https://discord.gg/4DTyEEKbSQ",
   youtube: "https://www.youtube.com/channel/yourChannel",
-  email: "your-email@example.com",
+  email: "dbnbusiness01@gmail.com",
   twitch: "https://www.twitch.tv/GroundZero000",
   twitter: "https://twitter.com/GroundZero000",
 };
