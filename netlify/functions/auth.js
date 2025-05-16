@@ -43,10 +43,18 @@ exports.handler = async function (event) {
     };
   }
 
+  // 3) Redirect back to the CMS admin with token in fragment only
+  // No query parameters so Netlify CMS can close the popup
+  const fragmentParams = new URLSearchParams({
+    access_token: data.access_token,
+    state: state || "",
+    provider: "github",
+  });
+
   return {
     statusCode: 302,
     headers: {
-      Location: `${process.env.URL}/admin/#access_token=${data.access_token}`,
+      Location: `${process.env.URL}/admin/#${fragmentParams.toString()}`,
     },
     body: "",
   };
