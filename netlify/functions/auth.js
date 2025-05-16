@@ -1,37 +1,48 @@
 exports.handler = async function (event) {
-  const params = new URLSearchParams(event.queryStringParameters);
-  const code = params.get("code");
+  const { code, state } = event.queryStringParameters || {};
 
+  // 1) Initial request: no `code` → redirect to GitHub authorize
   if (!code) {
+    const params = new URLSearchParams({
+      client_id: process.env.GITHUB_CLIENT_ID,
+      redirect_uri: `${process.env.URL}/.netlify/functions/auth`,
+      scope: "repo",
+      state: state || "",
+    });
     return {
-      statusCode: 400,
-      body: "Missing code parameter",
+      statusCode: 302,
+      headers: {
+        Location: `https://github.com/login/oauth/authorize?${params.toString()}`,
+      },
     };
   }
 
-  const clientId = process.env.GITHUB_CLIENT_ID;
-  const clientSecret = process.env.GITHUB_CLIENT_SECRET;
+  // 2) Callback: exchange code for access token
+  const tokenResponse = await fetch(
+    "https://github.com/login/oauth/access_token",
+    {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: new URLSearchParams({
+        client_id: process.env.GITHUB_CLIENT_ID,
+        client_secret: process.env.GITHUB_CLIENT_SECRET,
+        code,
+      }),
+    }
+  );
 
-  const response = await fetch(`https://github.com/login/oauth/access_token`, {
-    method: "POST",
-    headers: { Accept: "application/json" },
-    body: new URLSearchParams({
-      client_id: clientId,
-      client_secret: clientSecret,
-      code,
-    }),
-  });
-
-  const data = await response.json();
+  const data = await tokenResponse.json();
 
   if (data.error) {
     return {
-      statusCode: 401,
-      body: JSON.stringify(data),
+      statusCode: 400,
+      body: JSON.stringify({
+        error: data.error,
+        description: data.error_description,
+      }),
     };
   }
 
-  // Redirect to /admin/#access_token=... for Decap CMS to pick up the token
   return {
     statusCode: 302,
     headers: {
