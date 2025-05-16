@@ -1,5 +1,6 @@
 "use client";
 
+import Script from "next/script";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./globals.css";
@@ -11,9 +12,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-      </head>
       <body className="antialiased flex flex-col relative min-h-screen overflow-x-hidden bg-[#001f33]">
         {/* Base gradient layer */}
         <div className="fixed inset-0 bg-gradient-to-br from-[#001f33] via-[#003f66] to-[#0077aa] opacity-90" />
@@ -39,21 +37,25 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              if (window.netlifyIdentity) {
-                window.netlifyIdentity.on("init", (user) => {
-                  if (!user) {
-                    window.netlifyIdentity.on("login", () => {
-                      document.location.href = "/admin/";
-                    });
-                  }
-                });
-              }
-            `,
-          }}
+        {/* Netlify Identity Widget */}
+        <Script
+          src="https://identity.netlify.com/v1/netlify-identity-widget.js"
+          strategy="afterInteractive"
         />
+        {/* Redirect script */}
+        <Script id="netlify-identity-redirect" strategy="afterInteractive">
+          {`
+            if (window.netlifyIdentity) {
+              window.netlifyIdentity.on("init", (user) => {
+                if (!user) {
+                  window.netlifyIdentity.on("login", () => {
+                    document.location.href = "/admin/";
+                  });
+                }
+              });
+            }
+          `}
+        </Script>
       </body>
     </html>
   );
