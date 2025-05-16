@@ -67,15 +67,20 @@ exports.handler = async function (event) {
     state: state || "",
     provider: "github",
   });
-  const finalRedirectUrl = `${
-    process.env.URL
-  }/admin/#${fragmentParams.toString()}`;
+
+  // Ensure we use the base URL without any query parameters
+  const baseUrl = process.env.URL.split("?")[0];
+  const finalRedirectUrl = `${baseUrl}/admin/#${fragmentParams.toString()}`;
   console.log("Final redirect URL:", finalRedirectUrl);
 
   return {
     statusCode: 302,
     headers: {
       Location: finalRedirectUrl,
+      // Add cache control to prevent caching of the redirect
+      "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+      Pragma: "no-cache",
+      Expires: "0",
     },
     body: "",
   };
