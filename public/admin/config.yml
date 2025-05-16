@@ -4,9 +4,6 @@ backend:
   branch: main
   auth_scope: repo
 
-# This line should *not* be indented
-local_backend: true # Enable local backend for development
-
 media_folder: "public/images/uploads" # Media files will be stored here
 public_folder: "/images/uploads" # The src attribute for uploaded media
 
