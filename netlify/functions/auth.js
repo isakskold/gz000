@@ -46,7 +46,7 @@ exports.handler = async function (event) {
   return {
     statusCode: 302,
     headers: {
-      Location: `/admin/#access_token=${data.access_token}`,
+      Location: `${process.env.URL}/admin/#access_token=${data.access_token}`,
     },
     body: "",
   };
