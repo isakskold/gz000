@@ -1,7 +1,6 @@
 backend:
-  name: auth0
-  base_url: https://groundzero000.netlify.app
-  auth_endpoint: api/auth
+  name: git-gateway
+  branch: main # or your default branch name
 
 # This line should *not* be indented
 local_backend: true # Enable local backend for development
