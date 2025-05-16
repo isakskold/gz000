@@ -3,6 +3,8 @@ backend:
   repo: isakskold/gz000
   branch: main
   auth_scope: repo
+  base_url: https://groundzero000.netlify.app
+  auth_endpoint: /api/auth
 
 media_folder: "public/images/uploads" # Media files will be stored here
 public_folder: "/images/uploads" # The src attribute for uploaded media
