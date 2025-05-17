@@ -19,7 +19,12 @@ collections:
         label: "Bio"
         name: "bio"
         fields:
-          - { label: "Bio Text", name: "bioText", widget: "text", hint: "Biography text" }
+          - {
+              label: "Bio Text",
+              name: "bioText",
+              widget: "text",
+              hint: "Biography text",
+            }
 
   - name: "contact"
     label: "Contact Information"
@@ -32,11 +37,36 @@ collections:
         label: "Contact"
         name: "contact"
         fields:
-          - { label: "Discord", name: "discord", widget: "string", hint: "Discord invite link or username#1234" }
-          - { label: "YouTube", name: "youtube", widget: "string", hint: "Full YouTube channel URL" }
-          - { label: "Email", name: "email", widget: "string", hint: "Contact email address" }
-          - { label: "Twitch", name: "twitch", widget: "string", hint: "Full Twitch channel URL" }
-          - { label: "Twitter", name: "twitter", widget: "string", hint: "Full Twitter profile URL" }
+          - {
+              label: "Discord",
+              name: "discord",
+              widget: "string",
+              hint: "Discord invite link or username#1234",
+            }
+          - {
+              label: "YouTube",
+              name: "youtube",
+              widget: "string",
+              hint: "Full YouTube channel URL",
+            }
+          - {
+              label: "Email",
+              name: "email",
+              widget: "string",
+              hint: "Contact email address",
+            }
+          - {
+              label: "Twitch",
+              name: "twitch",
+              widget: "string",
+              hint: "Full Twitch channel URL",
+            }
+          - {
+              label: "Twitter",
+              name: "twitter",
+              widget: "string",
+              hint: "Full Twitter profile URL",
+            }
 
   - name: "tournaments"
     label: "Tournaments"
@@ -46,12 +76,38 @@ collections:
     fields:
       - { label: "Type", name: "type", widget: "hidden", default: "tournament" }
       - { label: "Name", name: "name", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
-      - { label: "Time", name: "time", widget: "string", hint: "24-hour format (HH:MM)" }
-      - { label: "Prize Pool", name: "prizePool", widget: "number", hint: "Amount in dollars" }
+      - {
+          label: "Date",
+          name: "date",
+          widget: "datetime",
+          format: "YYYY-MM-DD",
+        }
+      - {
+          label: "Time",
+          name: "time",
+          widget: "string",
+          hint: "24-hour format (HH:MM)",
+        }
+      - {
+          label: "Prize Pool",
+          name: "prizePool",
+          widget: "number",
+          hint: "Amount in dollars",
+        }
       - { label: "Max Participants", name: "maxParticipants", widget: "number" }
-      - { label: "Registration Open", name: "open", widget: "boolean", default: true }
-      - { label: "Tournament URL", name: "url", widget: "string", required: false, hint: "Optional tournament registration link" }
+      - {
+          label: "Registration Open",
+          name: "open",
+          widget: "boolean",
+          default: true,
+        }
+      - {
+          label: "Tournament URL",
+          name: "url",
+          widget: "string",
+          required: false,
+          hint: "Optional tournament registration link",
+        }
 
   - name: "showmatches"
     label: "Showmatches"
@@ -60,15 +116,40 @@ collections:
     format: "frontmatter"
     fields:
       - { label: "Type", name: "type", widget: "hidden", default: "showmatch" }
-      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
-      - { label: "Time", name: "time", widget: "string", hint: "24-hour format (HH:MM)" }
-      - { label: "Prize Pool", name: "prizePool", widget: "number", hint: "Amount in dollars" }
-      - { label: "Teams", name: "teams", widget: "list", fields:
-          - { label: "Team Name", name: "name", widget: "string", required: false, hint: "Required for 3v3 matches" }
-          - { label: "Players", name: "players", widget: "list", fields:
-              - { label: "Player Name", name: "player", widget: "string" }
-            }
+      - {
+          label: "Date",
+          name: "date",
+          widget: "datetime",
+          format: "YYYY-MM-DD",
         }
+      - {
+          label: "Time",
+          name: "time",
+          widget: "string",
+          hint: "24-hour format (HH:MM)",
+        }
+      - {
+          label: "Prize Pool",
+          name: "prizePool",
+          widget: "number",
+          hint: "Amount in dollars",
+        }
+      - label: "Teams"
+        name: "teams"
+        widget: "list"
+        fields:
+          - {
+              label: "Team Name",
+              name: "name",
+              widget: "string",
+              required: false,
+              hint: "Required for 3v3 matches",
+            }
+          - label: "Players"
+            name: "players"
+            widget: "list"
+            fields:
+              - { label: "Player Name", name: "player", widget: "string" }
 
   - name: "leaderboard"
     label: "Leaderboard"
@@ -76,10 +157,12 @@ collections:
     create: true
     format: "frontmatter"
     fields:
-      - { label: "Players", name: "leaderboardData", widget: "list", fields:
+      - label: "Players"
+        name: "leaderboardData"
+        widget: "list"
+        fields:
           - { label: "Player Name", name: "name", widget: "string" }
           - { label: "Wins", name: "wins", widget: "number" }
-        }
 
   - name: "timeline"
     label: "Timeline"
@@ -88,5 +171,10 @@ collections:
     format: "frontmatter"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - {
+          label: "Date",
+          name: "date",
+          widget: "datetime",
+          format: "YYYY-MM-DD",
+        }
       - { label: "Information", name: "info", widget: "text" }
