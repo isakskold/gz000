@@ -8,14 +8,85 @@ media_folder: "public/images/uploads" # Media files will be stored here
 public_folder: "/images/uploads" # The src attribute for uploaded media
 
 collections:
-  - name: "blog" # Used in routes, e.g., /admin/collections/blog
-    label: "Blog" # Used in the UI
-    folder: "content/blog" # The path to the folder where your content is stored
-    create: true # Allow users to create new documents in this collection
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template
-    fields: # The fields for each document
-      - { label: "Layout", name: "layout", widget: "hidden", default: "blog" }
+  - name: "bio"
+    label: "Bio"
+    folder: "content/bio"
+    create: false
+    identifier_field: "bio"
+    format: "frontmatter"
+    files:
+      - file: "content/bio/bio.md"
+        label: "Bio"
+        name: "bio"
+        fields:
+          - { label: "Bio Text", name: "bioText", widget: "text", hint: "Biography text" }
+
+  - name: "contact"
+    label: "Contact Information"
+    folder: "content/contact"
+    create: false
+    identifier_field: "contact"
+    format: "frontmatter"
+    files:
+      - file: "content/contact/contact.md"
+        label: "Contact"
+        name: "contact"
+        fields:
+          - { label: "Discord", name: "discord", widget: "string", hint: "Discord invite link or username#1234" }
+          - { label: "YouTube", name: "youtube", widget: "string", hint: "Full YouTube channel URL" }
+          - { label: "Email", name: "email", widget: "string", hint: "Contact email address" }
+          - { label: "Twitch", name: "twitch", widget: "string", hint: "Full Twitch channel URL" }
+          - { label: "Twitter", name: "twitter", widget: "string", hint: "Full Twitter profile URL" }
+
+  - name: "tournaments"
+    label: "Tournaments"
+    folder: "content/tournaments"
+    create: true
+    format: "frontmatter"
+    fields:
+      - { label: "Type", name: "type", widget: "hidden", default: "tournament" }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "Time", name: "time", widget: "string", hint: "24-hour format (HH:MM)" }
+      - { label: "Prize Pool", name: "prizePool", widget: "number", hint: "Amount in dollars" }
+      - { label: "Max Participants", name: "maxParticipants", widget: "number" }
+      - { label: "Registration Open", name: "open", widget: "boolean", default: true }
+      - { label: "Tournament URL", name: "url", widget: "string", required: false, hint: "Optional tournament registration link" }
+
+  - name: "showmatches"
+    label: "Showmatches"
+    folder: "content/showmatches"
+    create: true
+    format: "frontmatter"
+    fields:
+      - { label: "Type", name: "type", widget: "hidden", default: "showmatch" }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "Time", name: "time", widget: "string", hint: "24-hour format (HH:MM)" }
+      - { label: "Prize Pool", name: "prizePool", widget: "number", hint: "Amount in dollars" }
+      - { label: "Teams", name: "teams", widget: "list", fields:
+          - { label: "Team Name", name: "name", widget: "string", required: false, hint: "Required for 3v3 matches" }
+          - { label: "Players", name: "players", widget: "list", fields:
+              - { label: "Player Name", name: "player", widget: "string" }
+            }
+        }
+
+  - name: "leaderboard"
+    label: "Leaderboard"
+    folder: "content/leaderboard"
+    create: true
+    format: "frontmatter"
+    fields:
+      - { label: "Players", name: "leaderboardData", widget: "list", fields:
+          - { label: "Player Name", name: "name", widget: "string" }
+          - { label: "Wins", name: "wins", widget: "number" }
+        }
+
+  - name: "timeline"
+    label: "Timeline"
+    folder: "content/timeline"
+    create: true
+    format: "frontmatter"
+    fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Featured Image", name: "thumbnail", widget: "image" }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "Information", name: "info", widget: "text" }
