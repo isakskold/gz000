@@ -10,51 +10,61 @@ public_folder: "/images/uploads" # The src attribute for uploaded media
 collections:
   - name: "bio"
     label: "Bio"
-    file: "content/bio/bio.md"
+    folder: "content/bio"
+    create: false
     format: "frontmatter"
-    fields:
-      - {
-          label: "Bio Text",
-          name: "bioText",
-          widget: "text",
-          hint: "Biography text",
-        }
+    files:
+      - file: "content/bio/bio.md"
+        label: "Bio"
+        name: "bio"
+        fields:
+          - {
+              label: "Bio Text",
+              name: "bioText",
+              widget: "text",
+              hint: "Biography text",
+            }
 
   - name: "contact"
     label: "Contact Information"
-    file: "content/contact/contact.md"
+    folder: "content/contact"
+    create: false
     format: "frontmatter"
-    fields:
-      - {
-          label: "Discord",
-          name: "discord",
-          widget: "string",
-          hint: "Discord invite link or username#1234",
-        }
-      - {
-          label: "YouTube",
-          name: "youtube",
-          widget: "string",
-          hint: "Full YouTube channel URL",
-        }
-      - {
-          label: "Email",
-          name: "email",
-          widget: "string",
-          hint: "Contact email address",
-        }
-      - {
-          label: "Twitch",
-          name: "twitch",
-          widget: "string",
-          hint: "Full Twitch channel URL",
-        }
-      - {
-          label: "Twitter",
-          name: "twitter",
-          widget: "string",
-          hint: "Full Twitter profile URL",
-        }
+    files:
+      - file: "content/contact/contact.md"
+        label: "Contact"
+        name: "contact"
+        fields:
+          - {
+              label: "Discord",
+              name: "discord",
+              widget: "string",
+              hint: "Discord invite link or username#1234",
+            }
+          - {
+              label: "YouTube",
+              name: "youtube",
+              widget: "string",
+              hint: "Full YouTube channel URL",
+            }
+          - {
+              label: "Email",
+              name: "email",
+              widget: "string",
+              hint: "Contact email address",
+            }
+          - {
+              label: "Twitch",
+              name: "twitch",
+              widget: "string",
+              hint: "Full Twitch channel URL",
+            }
+          - {
+              label: "Twitter",
+              name: "twitter",
+              widget: "string",
+              hint: "Full Twitter profile URL",
+            }
 
   - name: "tournaments"
     label: "Tournaments"
