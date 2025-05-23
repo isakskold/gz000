@@ -251,6 +251,12 @@ collections:
     create: true
     format: "frontmatter"
     fields:
+      - {
+          label: "Title",
+          name: "title",
+          widget: "hidden",
+          default: "Leaderboard",
+        }
       - label: "Players"
         name: "leaderboardData"
         widget: "list"

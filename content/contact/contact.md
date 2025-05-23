@@ -1,5 +1,5 @@
 ---
-contact: contact
+title: Contact Information
 discord: "https://discord.gg/4DTyEEKbSQ"
 youtube: "https://www.youtube.com/channel/yourChannel"
 email: "dbnbusiness01@gmail.com"
