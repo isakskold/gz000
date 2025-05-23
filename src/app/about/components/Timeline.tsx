@@ -2,9 +2,12 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import TimelineItemCard from "./TimelineItemCard";
-import { timelineItems } from "@/data/timeline";
 
-const Timeline: React.FC = () => {
+interface TimelineProps {
+  timelineItems: any[];
+}
+
+const Timeline: React.FC<TimelineProps> = ({ timelineItems }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const manualSelectionRef = useRef(false);
   const itemsRef = useRef<(HTMLDivElement | null)[]>([]);

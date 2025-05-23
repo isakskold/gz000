@@ -2,18 +2,18 @@
 
 import { FiCopy } from "react-icons/fi"; // Importing the copy icon from react-icons
 import { FiCheck } from "react-icons/fi";
-import { contactData } from "@/data/contact";
 import { useState } from "react"; // Importing useState
 
 interface ContactItemProps {
-  label: keyof typeof contactData; // Enforce that 'label' is a valid key from 'contactData'
+  label: string;
+  value: string;
 }
 
-const ContactItem: React.FC<ContactItemProps> = ({ label }) => {
+const ContactItem: React.FC<ContactItemProps> = ({ label, value }) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(contactData[label]);
+    navigator.clipboard.writeText(value);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -33,7 +33,7 @@ const ContactItem: React.FC<ContactItemProps> = ({ label }) => {
           </button>
         </div>
         <div className="font-rajdhani text-gray-300 text-base sm:text-lg break-words">
-          {contactData[label]}
+          {value}
         </div>
       </div>
     </div>

@@ -9,9 +9,17 @@ const MobileTimeline = dynamic(() => import("./MobileTimeline"), {
   ssr: false,
 });
 
-const TimelineWrapper = () => {
+interface TimelineWrapperProps {
+  timelineItems: any[];
+}
+
+const TimelineWrapper = ({ timelineItems }: TimelineWrapperProps) => {
   const isDesktop = useMediaQuery({ minWidth: 768 });
-  return isDesktop ? <Timeline /> : <MobileTimeline />;
+  return isDesktop ? (
+    <Timeline timelineItems={timelineItems} />
+  ) : (
+    <MobileTimeline timelineItems={timelineItems} />
+  );
 };
 
 export default TimelineWrapper;

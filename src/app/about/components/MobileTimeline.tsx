@@ -1,9 +1,12 @@
 "use client";
 
 import React from "react";
-import { timelineItems } from "@/data/timeline";
 
-const MobileTimeline: React.FC = () => {
+interface MobileTimelineProps {
+  timelineItems: any[];
+}
+
+const MobileTimeline: React.FC<MobileTimelineProps> = ({ timelineItems }) => {
   const sortedTimelineItems = [...timelineItems].sort(
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
   );

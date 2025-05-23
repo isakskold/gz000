@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import {
   FaDiscord,
@@ -13,11 +13,27 @@ import {
   FaTimes,
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { contactData } from "../data/contact";
+import { ContactDataType } from "@/types/contact";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [contactData, setContactData] = useState<ContactDataType | null>(null);
   const pathname = usePathname();
+
+  useEffect(() => {
+    const fetchContactData = async () => {
+      try {
+        const response = await fetch("/api/contact");
+        if (!response.ok) throw new Error("Failed to fetch contact data");
+        const data = await response.json();
+        setContactData(data);
+      } catch (error) {
+        console.error("Error fetching contact data:", error);
+      }
+    };
+
+    fetchContactData();
+  }, []);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -27,6 +43,24 @@ const Header = () => {
     setIsMobileMenuOpen(false);
     window.scrollTo(0, 0);
   };
+
+  if (!contactData) {
+    return (
+      <div className="fixed flex px-2 top-0 w-full h-16 sm:h-32 bg-black/80 backdrop-blur-sm z-[9999] border-b border-gray-800">
+        <div className="flex grow mx-auto justify-between items-center max-w-[1200px]">
+          <Link href="/" onClick={handleLinkClick}>
+            <Image
+              src="/pngs/whiteLogo.png"
+              alt="Logo"
+              width={80}
+              height={80}
+              className="h-14 sm:h-16 md:h-20 w-auto hover:scale-105 transition-transform duration-200 cursor-pointer"
+            />
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -108,9 +142,7 @@ const Header = () => {
           {/* Desktop Socials */}
           <div className="hidden md:flex items-center gap-4">
             <a
-              href={`https://discord.com/users/${
-                contactData.discord.split("#")[0]
-              }`}
+              href={contactData.discord}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -203,9 +235,7 @@ const Header = () => {
 
           <div className="flex gap-8 mt-8">
             <a
-              href={`https://discord.com/users/${
-                contactData.discord.split("#")[0]
-              }`}
+              href={contactData.discord}
               target="_blank"
               rel="noopener noreferrer"
             >

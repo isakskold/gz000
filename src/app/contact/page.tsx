@@ -1,8 +1,18 @@
 import ContactItem from "./ContactItem";
-import { contactData } from "@/data/contact";
 import PageHeader from "@/components/PageHeader";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 
 type Props = Record<string, never>;
+
+const contactFile = path.join(process.cwd(), "content/contact/contact.md");
+const file = fs.readFileSync(contactFile, "utf8");
+const { data: contactData } = matter(file);
+
+const filteredContactKeys = Object.keys(contactData).filter(
+  (key) => key !== "title"
+);
 
 const page: React.FC<Props> = () => {
   return (
@@ -12,7 +22,7 @@ const page: React.FC<Props> = () => {
       <div
         className={`flex flex-col mx-auto gap-11 justify-center w-full max-w-[800px]`}
       >
-        {Object.keys(contactData).map((key, index) => (
+        {filteredContactKeys.map((key, index) => (
           <div
             key={key}
             className="animate-slide-in-top" // Same animation for all items
@@ -20,7 +30,7 @@ const page: React.FC<Props> = () => {
               animationDelay: `${index * 150}ms`, // Dynamically calculate delay
             }}
           >
-            <ContactItem key={key} label={key as keyof typeof contactData} />
+            <ContactItem key={key} label={key} value={contactData[key]} />
           </div>
         ))}
       </div>

@@ -1,8 +1,24 @@
 ---
 title: Leaderboard
 leaderboardData:
-  - name: "Player 1"
-    wins: 0
-  - name: "Player 2"
-    wins: 0
+  - name: "GroundZero000"
+    wins: 42
+  - name: "ProPlayer1"
+    wins: 38
+  - name: "ChampionX"
+    wins: 35
+  - name: "EliteGamer"
+    wins: 32
+  - name: "MasterPlayer"
+    wins: 30
+  - name: "SkillDemon"
+    wins: 28
+  - name: "VictoryKing"
+    wins: 25
+  - name: "BattleMaster"
+    wins: 22
+  - name: "WarriorPro"
+    wins: 20
+  - name: "DuelMaster"
+    wins: 18
 ---

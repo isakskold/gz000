@@ -1,6 +1,5 @@
 ---
 title: Bio
-bio: bio
 bioText: |
   Welcome to my corner of the internet!
 
