@@ -248,7 +248,7 @@ collections:
   - name: "leaderboard"
     label: "Leaderboard"
     folder: "content/leaderboard"
-    create: true
+    create: false
     format: "frontmatter"
     fields:
       - {
