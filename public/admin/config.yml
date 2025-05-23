@@ -70,13 +70,8 @@ collections:
           label: "Date",
           name: "date",
           widget: "datetime",
-          format: "YYYY-MM-DD",
-        }
-      - {
-          label: "Time",
-          name: "time",
-          widget: "string",
-          hint: "24-hour format (HH:MM)",
+          format: "YYYY-MM-DD HH:mm",
+          time_format: true,
         }
       - {
           label: "Prize Pool",
@@ -110,13 +105,8 @@ collections:
           label: "Date",
           name: "date",
           widget: "datetime",
-          format: "YYYY-MM-DD",
-        }
-      - {
-          label: "Time",
-          name: "time",
-          widget: "string",
-          hint: "24-hour format (HH:MM)",
+          format: "YYYY-MM-DD HH:mm",
+          time_format: true,
         }
       - {
           label: "Prize Pool",
@@ -127,6 +117,8 @@ collections:
       - label: "Teams"
         name: "teams"
         widget: "list"
+        min: 2
+        max: 2
         fields:
           - {
               label: "Team Name",
