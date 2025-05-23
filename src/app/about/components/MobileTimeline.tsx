@@ -1,12 +1,7 @@
 "use client";
 
 import React from "react";
-
-interface TimelineItem {
-  title: string;
-  date: string;
-  info: string;
-}
+import { TimelineItem } from "@/types/timeline";
 
 interface MobileTimelineProps {
   timelineItems: TimelineItem[];

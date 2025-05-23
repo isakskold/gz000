@@ -2,12 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import TimelineItemCard from "./TimelineItemCard";
-
-interface TimelineItem {
-  title: string;
-  date: string;
-  info: string;
-}
+import { TimelineItem } from "@/types/timeline";
 
 interface TimelineProps {
   timelineItems: TimelineItem[];
