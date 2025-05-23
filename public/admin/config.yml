@@ -94,126 +94,131 @@ collections:
           hint: "Optional tournament registration link",
         }
 
-  - name: "showmatches"
-    label: "Showmatches"
-    folder: "content/showmatches"
+  - name: "showmatches_1v1"
+    label: "Showmatches 1v1"
+    folder: "content/showmatches_1v1"
     create: true
     format: "frontmatter"
-    types:
-      - label: "1v1 Showmatch"
-        name: "1v1"
+    fields:
+      - {
+          label: "Date",
+          name: "date",
+          widget: "datetime",
+          format: "YYYY-MM-DD HH:mm",
+          time_format: true,
+        }
+      - {
+          label: "Prize Pool",
+          name: "prizePool",
+          widget: "number",
+          hint: "Amount in dollars",
+        }
+      - label: "Team 1"
+        name: "team1"
+        widget: "object"
         fields:
-          - {
-              label: "Date",
-              name: "date",
-              widget: "datetime",
-              format: "YYYY-MM-DD HH:mm",
-              time_format: true,
-            }
-          - {
-              label: "Prize Pool",
-              name: "prizePool",
-              widget: "number",
-              hint: "Amount in dollars",
-            }
-          - label: "Team 1"
-            name: "team1"
-            widget: "object"
-            fields:
-              - label: "Player"
-                name: "player"
-                widget: "string"
-          - label: "Team 2"
-            name: "team2"
-            widget: "object"
-            fields:
-              - label: "Player"
-                name: "player"
-                widget: "string"
-      - label: "2v2 Showmatch"
-        name: "2v2"
+          - label: "Player"
+            name: "player"
+            widget: "string"
+      - label: "Team 2"
+        name: "team2"
+        widget: "object"
         fields:
-          - {
-              label: "Date",
-              name: "date",
-              widget: "datetime",
-              format: "YYYY-MM-DD HH:mm",
-              time_format: true,
-            }
-          - {
-              label: "Prize Pool",
-              name: "prizePool",
-              widget: "number",
-              hint: "Amount in dollars",
-            }
-          - label: "Team 1"
-            name: "team1"
-            widget: "object"
-            fields:
-              - label: "Player 1"
-                name: "player1"
-                widget: "string"
-              - label: "Player 2"
-                name: "player2"
-                widget: "string"
-          - label: "Team 2"
-            name: "team2"
-            widget: "object"
-            fields:
-              - label: "Player 1"
-                name: "player1"
-                widget: "string"
-              - label: "Player 2"
-                name: "player2"
-                widget: "string"
-      - label: "3v3 Showmatch"
-        name: "3v3"
+          - label: "Player"
+            name: "player"
+            widget: "string"
+
+  - name: "showmatches_2v2"
+    label: "Showmatches 2v2"
+    folder: "content/showmatches_2v2"
+    create: true
+    format: "frontmatter"
+    fields:
+      - {
+          label: "Date",
+          name: "date",
+          widget: "datetime",
+          format: "YYYY-MM-DD HH:mm",
+          time_format: true,
+        }
+      - {
+          label: "Prize Pool",
+          name: "prizePool",
+          widget: "number",
+          hint: "Amount in dollars",
+        }
+      - label: "Team 1"
+        name: "team1"
+        widget: "object"
         fields:
-          - {
-              label: "Date",
-              name: "date",
-              widget: "datetime",
-              format: "YYYY-MM-DD HH:mm",
-              time_format: true,
-            }
-          - {
-              label: "Prize Pool",
-              name: "prizePool",
-              widget: "number",
-              hint: "Amount in dollars",
-            }
-          - label: "Team 1"
-            name: "team1"
-            widget: "object"
-            fields:
-              - label: "Team Name"
-                name: "name"
-                widget: "string"
-              - label: "Player 1"
-                name: "player1"
-                widget: "string"
-              - label: "Player 2"
-                name: "player2"
-                widget: "string"
-              - label: "Player 3"
-                name: "player3"
-                widget: "string"
-          - label: "Team 2"
-            name: "team2"
-            widget: "object"
-            fields:
-              - label: "Team Name"
-                name: "name"
-                widget: "string"
-              - label: "Player 1"
-                name: "player1"
-                widget: "string"
-              - label: "Player 2"
-                name: "player2"
-                widget: "string"
-              - label: "Player 3"
-                name: "player3"
-                widget: "string"
+          - label: "Player 1"
+            name: "player1"
+            widget: "string"
+          - label: "Player 2"
+            name: "player2"
+            widget: "string"
+      - label: "Team 2"
+        name: "team2"
+        widget: "object"
+        fields:
+          - label: "Player 1"
+            name: "player1"
+            widget: "string"
+          - label: "Player 2"
+            name: "player2"
+            widget: "string"
+
+  - name: "showmatches_3v3"
+    label: "Showmatches 3v3"
+    folder: "content/showmatches_3v3"
+    create: true
+    format: "frontmatter"
+    fields:
+      - {
+          label: "Date",
+          name: "date",
+          widget: "datetime",
+          format: "YYYY-MM-DD HH:mm",
+          time_format: true,
+        }
+      - {
+          label: "Prize Pool",
+          name: "prizePool",
+          widget: "number",
+          hint: "Amount in dollars",
+        }
+      - label: "Team 1"
+        name: "team1"
+        widget: "object"
+        fields:
+          - label: "Team Name"
+            name: "name"
+            widget: "string"
+          - label: "Player 1"
+            name: "player1"
+            widget: "string"
+          - label: "Player 2"
+            name: "player2"
+            widget: "string"
+          - label: "Player 3"
+            name: "player3"
+            widget: "string"
+      - label: "Team 2"
+        name: "team2"
+        widget: "object"
+        fields:
+          - label: "Team Name"
+            name: "name"
+            widget: "string"
+          - label: "Player 1"
+            name: "player1"
+            widget: "string"
+          - label: "Player 2"
+            name: "player2"
+            widget: "string"
+          - label: "Player 3"
+            name: "player3"
+            widget: "string"
 
   - name: "leaderboard"
     label: "Leaderboard"
