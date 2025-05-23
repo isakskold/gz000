@@ -99,74 +99,121 @@ collections:
     folder: "content/showmatches"
     create: true
     format: "frontmatter"
-    summary: "{{fields.type}}: {{fields.date}}"
-    fields:
-      - {
-          label: "Showmatch Type",
-          name: "type",
-          widget: "select",
-          options: ["1v1", "2v2", "3v3"],
-          default: "1v1",
-        }
-      - {
-          label: "Date",
-          name: "date",
-          widget: "datetime",
-          format: "YYYY-MM-DD HH:mm",
-          time_format: true,
-        }
-      - {
-          label: "Prize Pool",
-          name: "prizePool",
-          widget: "number",
-          hint: "Amount in dollars",
-        }
     types:
       - label: "1v1 Showmatch"
         name: "1v1"
         fields:
-          - label: "Team 1 Player"
-            name: "team1_player"
-            widget: "string"
-          - label: "Team 2 Player"
-            name: "team2_player"
-            widget: "string"
+          - {
+              label: "Date",
+              name: "date",
+              widget: "datetime",
+              format: "YYYY-MM-DD HH:mm",
+              time_format: true,
+            }
+          - {
+              label: "Prize Pool",
+              name: "prizePool",
+              widget: "number",
+              hint: "Amount in dollars",
+            }
+          - label: "Team 1"
+            name: "team1"
+            widget: "object"
+            fields:
+              - label: "Player"
+                name: "player"
+                widget: "string"
+          - label: "Team 2"
+            name: "team2"
+            widget: "object"
+            fields:
+              - label: "Player"
+                name: "player"
+                widget: "string"
       - label: "2v2 Showmatch"
         name: "2v2"
         fields:
-          - label: "Team 1 Players"
-            name: "team1_players"
-            widget: "list"
-            min: 2
-            max: 2
-            field: { label: "Player Name", name: "player", widget: "string" }
-          - label: "Team 2 Players"
-            name: "team2_players"
-            widget: "list"
-            min: 2
-            max: 2
-            field: { label: "Player Name", name: "player", widget: "string" }
+          - {
+              label: "Date",
+              name: "date",
+              widget: "datetime",
+              format: "YYYY-MM-DD HH:mm",
+              time_format: true,
+            }
+          - {
+              label: "Prize Pool",
+              name: "prizePool",
+              widget: "number",
+              hint: "Amount in dollars",
+            }
+          - label: "Team 1"
+            name: "team1"
+            widget: "object"
+            fields:
+              - label: "Player 1"
+                name: "player1"
+                widget: "string"
+              - label: "Player 2"
+                name: "player2"
+                widget: "string"
+          - label: "Team 2"
+            name: "team2"
+            widget: "object"
+            fields:
+              - label: "Player 1"
+                name: "player1"
+                widget: "string"
+              - label: "Player 2"
+                name: "player2"
+                widget: "string"
       - label: "3v3 Showmatch"
         name: "3v3"
         fields:
-          - label: "Team 1 Name"
-            name: "team1_name"
-            widget: "string"
-          - label: "Team 1 Players"
-            name: "team1_players"
-            widget: "list"
-            min: 3
-            max: 3
-            field: { label: "Player Name", name: "player", widget: "string" }
-          - label: "Team 2 Name"
-            name: "team2_name"
-            widget: "string"
-          - label: "Team 2 Players"
-            name: "team2_players"
-            widget: "list"
-            min: 3
-            max: 3
-            field: { label: "Player Name", name: "player", widget: "string" }
+          - {
+              label: "Date",
+              name: "date",
+              widget: "datetime",
+              format: "YYYY-MM-DD HH:mm",
+              time_format: true,
+            }
+          - {
+              label: "Prize Pool",
+              name: "prizePool",
+              widget: "number",
+              hint: "Amount in dollars",
+            }
+          - label: "Team 1"
+            name: "team1"
+            widget: "object"
+            fields:
+              - label: "Team Name"
+                name: "name"
+                widget: "string"
+              - label: "Player 1"
+                name: "player1"
+                widget: "string"
+              - label: "Player 2"
+                name: "player2"
+                widget: "string"
+              - label: "Player 3"
+                name: "player3"
+                widget: "string"
+          - label: "Team 2"
+            name: "team2"
+            widget: "object"
+            fields:
+              - label: "Team Name"
+                name: "name"
+                widget: "string"
+              - label: "Player 1"
+                name: "player1"
+                widget: "string"
+              - label: "Player 2"
+                name: "player2"
+                widget: "string"
+              - label: "Player 3"
+                name: "player3"
+                widget: "string"
 
   - name: "leaderboard"
     label: "Leaderboard"
