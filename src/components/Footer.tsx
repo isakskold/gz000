@@ -1,12 +1,30 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { FaDiscord, FaTwitch, FaYoutube, FaEnvelope } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { ContactDataType } from "@/types/contact";
 
-interface FooterProps {
-  contactData: ContactDataType;
-}
+const Footer = () => {
+  const [contactData, setContactData] = useState<ContactDataType | null>(null);
 
-const Footer = ({ contactData }: FooterProps) => {
+  useEffect(() => {
+    const fetchContactData = async () => {
+      try {
+        const response = await fetch("/api/contact");
+        if (!response.ok) throw new Error("Failed to fetch contact data");
+        const data = await response.json();
+        setContactData(data);
+      } catch (error) {
+        console.error("Error fetching contact data:", error);
+      }
+    };
+
+    fetchContactData();
+  }, []);
+
+  if (!contactData) return null;
+
   const currentYear = new Date().getFullYear();
 
   return (

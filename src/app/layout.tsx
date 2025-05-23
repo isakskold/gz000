@@ -3,15 +3,11 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./globals.css";
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const res = await fetch("/api/contact", {
-    cache: "no-store",
-  });
-  const contactData = await res.json();
   return (
     <html lang="en">
       <body className="antialiased flex flex-col relative min-h-screen overflow-x-hidden bg-[#001f33]">
@@ -34,11 +30,11 @@ export default async function RootLayout({
         <div className="fixed inset-0 bg-gradient-to-r from-[#001f33] via-transparent to-[#001f33] opacity-50" />
 
         {/* Content */}
-        <Header contactData={contactData} />
+        <Header />
         <main className="flex flex-grow pb-6 md:pb-14 px-[10%] pt-16 sm:pt-32 relative z-10">
           {children}
         </main>
-        <Footer contactData={contactData} />
+        <Footer />
         {/* Netlify Identity Widget */}
         <Script
           src="https://identity.netlify.com/v1/netlify-identity-widget.js"

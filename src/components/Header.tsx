@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import {
   FaDiscord,
@@ -15,13 +15,25 @@ import {
 import { FaXTwitter } from "react-icons/fa6";
 import { ContactDataType } from "@/types/contact";
 
-interface HeaderProps {
-  contactData: ContactDataType;
-}
-
-const Header = ({ contactData }: HeaderProps) => {
+const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [contactData, setContactData] = useState<ContactDataType | null>(null);
   const pathname = usePathname();
+
+  useEffect(() => {
+    const fetchContactData = async () => {
+      try {
+        const response = await fetch("/api/contact");
+        if (!response.ok) throw new Error("Failed to fetch contact data");
+        const data = await response.json();
+        setContactData(data);
+      } catch (error) {
+        console.error("Error fetching contact data:", error);
+      }
+    };
+
+    fetchContactData();
+  }, []);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
