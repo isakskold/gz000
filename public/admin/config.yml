@@ -12,6 +12,7 @@ collections:
     label: "Bio"
     folder: "content/bio"
     create: false
+    delete: false
     format: "frontmatter"
     fields:
       - { label: "Title", name: "title", widget: "hidden", default: "Bio" }
@@ -26,6 +27,7 @@ collections:
     label: "Contact Information"
     folder: "content/contact"
     create: false
+    delete: false
     format: "frontmatter"
     fields:
       - {
@@ -249,6 +251,7 @@ collections:
     label: "Leaderboard"
     folder: "content/leaderboard"
     create: false
+    delete: false
     format: "frontmatter"
     fields:
       - {
