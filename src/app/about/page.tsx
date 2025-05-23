@@ -4,6 +4,7 @@ import path from "path";
 import matter from "gray-matter";
 import PageHeader from "@/components/PageHeader";
 import TimelineWrapper from "./components/TimelineWrapper";
+import { TimelineItem } from "@/types/timeline";
 
 const bioFile = path.join(process.cwd(), "content/bio/bio.md");
 const bioFileContent = fs.readFileSync(bioFile, "utf8");
@@ -14,7 +15,8 @@ const timelineFile = path.join(process.cwd(), "content/timeline/timeline.md");
 const timelineFileContent = fs.readFileSync(timelineFile, "utf8");
 const { data: timelineData } = matter(timelineFileContent);
 const timelineItems = (timelineData.timelineItems || []).sort(
-  (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  (a: TimelineItem, b: TimelineItem) =>
+    new Date(a.date).getTime() - new Date(b.date).getTime()
 );
 
 const Page = () => {
