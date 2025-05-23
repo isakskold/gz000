@@ -3,8 +3,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import TimelineItemCard from "./TimelineItemCard";
 
+interface TimelineItem {
+  title: string;
+  date: string;
+  info: string;
+}
+
 interface TimelineProps {
-  timelineItems: any[];
+  timelineItems: TimelineItem[];
 }
 
 const Timeline: React.FC<TimelineProps> = ({ timelineItems }) => {

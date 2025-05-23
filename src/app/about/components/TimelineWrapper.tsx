@@ -9,8 +9,14 @@ const MobileTimeline = dynamic(() => import("./MobileTimeline"), {
   ssr: false,
 });
 
+interface TimelineItem {
+  title: string;
+  date: string;
+  info: string;
+}
+
 interface TimelineWrapperProps {
-  timelineItems: any[];
+  timelineItems: TimelineItem[];
 }
 
 const TimelineWrapper = ({ timelineItems }: TimelineWrapperProps) => {

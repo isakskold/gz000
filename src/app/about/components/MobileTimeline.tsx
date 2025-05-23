@@ -2,8 +2,14 @@
 
 import React from "react";
 
+interface TimelineItem {
+  title: string;
+  date: string;
+  info: string;
+}
+
 interface MobileTimelineProps {
-  timelineItems: any[];
+  timelineItems: TimelineItem[];
 }
 
 const MobileTimeline: React.FC<MobileTimelineProps> = ({ timelineItems }) => {
