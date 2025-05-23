@@ -1,24 +1,24 @@
 ---
 title: Leaderboard
 leaderboardData:
-  - name: "GroundZero000"
+  - name: GroundZero000
     wins: 42
-  - name: "ProPlayer1"
-    wins: 38
-  - name: "ChampionX"
+  - name: Trappo
+    wins: 41
+  - name: ChampionX
     wins: 35
-  - name: "EliteGamer"
+  - name: EliteGamer
     wins: 32
-  - name: "MasterPlayer"
+  - name: MasterPlayer
     wins: 30
-  - name: "SkillDemon"
+  - name: SkillDemon
     wins: 28
-  - name: "VictoryKing"
+  - name: VictoryKing
     wins: 25
-  - name: "BattleMaster"
+  - name: BattleMaster
     wins: 22
-  - name: "WarriorPro"
+  - name: WarriorPro
     wins: 20
-  - name: "DuelMaster"
+  - name: DuelMaster
     wins: 18
 ---
