@@ -99,8 +99,15 @@ collections:
     folder: "content/showmatches"
     create: true
     format: "frontmatter"
+    summary: "{{fields.type}}: {{fields.date}}"
     fields:
-      - { label: "Type", name: "type", widget: "hidden", default: "showmatch" }
+      - {
+          label: "Showmatch Type",
+          name: "type",
+          widget: "select",
+          options: ["1v1", "2v2", "3v3"],
+          default: "1v1",
+        }
       - {
           label: "Date",
           name: "date",
@@ -114,24 +121,52 @@ collections:
           widget: "number",
           hint: "Amount in dollars",
         }
-      - label: "Teams"
-        name: "teams"
-        widget: "list"
-        min: 2
-        max: 2
+    types:
+      - label: "1v1 Showmatch"
+        name: "1v1"
         fields:
-          - {
-              label: "Team Name",
-              name: "name",
-              widget: "string",
-              required: false,
-              hint: "Required for 3v3 matches",
-            }
-          - label: "Players"
-            name: "players"
+          - label: "Team 1 Player"
+            name: "team1_player"
+            widget: "string"
+          - label: "Team 2 Player"
+            name: "team2_player"
+            widget: "string"
+      - label: "2v2 Showmatch"
+        name: "2v2"
+        fields:
+          - label: "Team 1 Players"
+            name: "team1_players"
             widget: "list"
-            fields:
-              - { label: "Player Name", name: "player", widget: "string" }
+            min: 2
+            max: 2
+            field: { label: "Player Name", name: "player", widget: "string" }
+          - label: "Team 2 Players"
+            name: "team2_players"
+            widget: "list"
+            min: 2
+            max: 2
+            field: { label: "Player Name", name: "player", widget: "string" }
+      - label: "3v3 Showmatch"
+        name: "3v3"
+        fields:
+          - label: "Team 1 Name"
+            name: "team1_name"
+            widget: "string"
+          - label: "Team 1 Players"
+            name: "team1_players"
+            widget: "list"
+            min: 3
+            max: 3
+            field: { label: "Player Name", name: "player", widget: "string" }
+          - label: "Team 2 Name"
+            name: "team2_name"
+            widget: "string"
+          - label: "Team 2 Players"
+            name: "team2_players"
+            widget: "list"
+            min: 3
+            max: 3
+            field: { label: "Player Name", name: "player", widget: "string" }
 
   - name: "leaderboard"
     label: "Leaderboard"
