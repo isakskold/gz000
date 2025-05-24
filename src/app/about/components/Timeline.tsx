@@ -10,6 +10,7 @@ interface TimelineProps {
 
 const Timeline: React.FC<TimelineProps> = ({ timelineItems }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isAutoSelectionDisabled, setIsAutoSelectionDisabled] = useState(false);
   const manualSelectionRef = useRef(false);
   const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -19,8 +20,34 @@ const Timeline: React.FC<TimelineProps> = ({ timelineItems }) => {
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
   );
 
+  // Safety check for empty timeline
+  if (sortedTimelineItems.length === 0) {
+    return (
+      <div className="hidden md:flex justify-between w-full">
+        <div className="flex flex-col gap-8 justify-start w-full max-h-[30vh] min-h-80 p-6 rounded-lg bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] shadow-lg border border-gray-700">
+          <p className="text-center text-gray-400 font-rajdhani">
+            No timeline items available
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // If there's only one item, disable auto-selection by default
   useEffect(() => {
-    if (manualSelectionRef.current) return;
+    if (sortedTimelineItems.length === 1) {
+      setIsAutoSelectionDisabled(true);
+    }
+  }, [sortedTimelineItems.length]);
+
+  useEffect(() => {
+    // Don't run auto-selection if there's only one item or if it's disabled
+    if (
+      manualSelectionRef.current ||
+      isAutoSelectionDisabled ||
+      sortedTimelineItems.length <= 1
+    )
+      return;
 
     const autoChangeIndex = () => {
       setSelectedIndex(
@@ -32,7 +59,7 @@ const Timeline: React.FC<TimelineProps> = ({ timelineItems }) => {
       autoChangeIndex();
     }, 4000);
     return () => clearInterval(intervalId);
-  }, [sortedTimelineItems.length]);
+  }, [sortedTimelineItems.length, isAutoSelectionDisabled]);
 
   useEffect(() => {
     const item = itemsRef.current[selectedIndex];
@@ -56,6 +83,7 @@ const Timeline: React.FC<TimelineProps> = ({ timelineItems }) => {
   const handleItemClick = (index: number) => {
     setSelectedIndex(index);
     manualSelectionRef.current = true;
+    setIsAutoSelectionDisabled(true);
   };
 
   return (
@@ -97,8 +125,18 @@ const Timeline: React.FC<TimelineProps> = ({ timelineItems }) => {
           <div
             key={selectedIndex}
             className={`w-full bg-[#00aaff] rounded ${
-              manualSelectionRef.current ? "opacity-0" : "opacity-100"
-            } ${manualSelectionRef.current ? "" : "progress-bar-fill"}`}
+              manualSelectionRef.current ||
+              isAutoSelectionDisabled ||
+              sortedTimelineItems.length <= 1
+                ? "opacity-0"
+                : "opacity-100"
+            } ${
+              manualSelectionRef.current ||
+              isAutoSelectionDisabled ||
+              sortedTimelineItems.length <= 1
+                ? ""
+                : "progress-bar-fill"
+            }`}
           />
         </div>
       </div>
