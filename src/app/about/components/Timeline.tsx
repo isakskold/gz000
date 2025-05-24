@@ -20,19 +20,6 @@ const Timeline: React.FC<TimelineProps> = ({ timelineItems }) => {
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
   );
 
-  // Safety check for empty timeline
-  if (sortedTimelineItems.length === 0) {
-    return (
-      <div className="hidden md:flex justify-between w-full">
-        <div className="flex flex-col gap-8 justify-start w-full max-h-[30vh] min-h-80 p-6 rounded-lg bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] shadow-lg border border-gray-700">
-          <p className="text-center text-gray-400 font-rajdhani">
-            No timeline items available
-          </p>
-        </div>
-      </div>
-    );
-  }
-
   // If there's only one item, disable auto-selection by default
   useEffect(() => {
     if (sortedTimelineItems.length === 1) {
@@ -79,6 +66,19 @@ const Timeline: React.FC<TimelineProps> = ({ timelineItems }) => {
       }, 100); // Small delay to ensure smooth transition
     }
   }, [selectedIndex]);
+
+  // Safety check for empty timeline - moved after all hooks
+  if (sortedTimelineItems.length === 0) {
+    return (
+      <div className="hidden md:flex justify-between w-full">
+        <div className="flex flex-col gap-8 justify-start w-full max-h-[30vh] min-h-80 p-6 rounded-lg bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] shadow-lg border border-gray-700">
+          <p className="text-center text-gray-400 font-rajdhani">
+            No timeline items available
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   const handleItemClick = (index: number) => {
     setSelectedIndex(index);
