@@ -1,7 +1,23 @@
 // app/about/page.tsx
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 import PageHeader from "@/components/PageHeader";
 import TimelineWrapper from "./components/TimelineWrapper";
-import { bioText } from "@/data/bio";
+import { TimelineItem } from "@/types/timeline";
+
+const bioFile = path.join(process.cwd(), "content/bio/bio.md");
+const bioFileContent = fs.readFileSync(bioFile, "utf8");
+const { data: bioData } = matter(bioFileContent);
+const bioText = bioData.bioText || "";
+
+const timelineFile = path.join(process.cwd(), "content/timeline/timeline.md");
+const timelineFileContent = fs.readFileSync(timelineFile, "utf8");
+const { data: timelineData } = matter(timelineFileContent);
+const timelineItems = (timelineData.timelineItems || []).sort(
+  (a: TimelineItem, b: TimelineItem) =>
+    new Date(a.date).getTime() - new Date(b.date).getTime()
+);
 
 const Page = () => {
   return (
@@ -25,7 +41,7 @@ const Page = () => {
           <h2 className="text-3xl font-oxanium text-stroke mb-6 text-center">
             Timeline
           </h2>
-          <TimelineWrapper />
+          <TimelineWrapper timelineItems={timelineItems} />
         </div>
       </div>
     </div>

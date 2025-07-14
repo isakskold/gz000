@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { TimelineItem } from "@/data/timeline";
+import { TimelineItem } from "@/types/timeline";
 
 interface Props {
   item: TimelineItem;

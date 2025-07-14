@@ -1,23 +1,39 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Link from "next/link";
-import maxWidth from "@/const/maxWidth";
-import { useState } from "react";
+import Image from "next/image";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import {
   FaDiscord,
   FaTwitch,
   FaYoutube,
-  FaTwitter,
   FaEnvelope,
   FaBars,
   FaTimes,
 } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { ContactDataType } from "@/types/contact";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [contactData, setContactData] = useState<ContactDataType | null>(null);
   const pathname = usePathname();
+
+  useEffect(() => {
+    const fetchContactData = async () => {
+      try {
+        const response = await fetch("/api/contact");
+        if (!response.ok) throw new Error("Failed to fetch contact data");
+        const data = await response.json();
+        setContactData(data);
+      } catch (error) {
+        console.error("Error fetching contact data:", error);
+      }
+    };
+
+    fetchContactData();
+  }, []);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -28,15 +44,35 @@ const Header = () => {
     window.scrollTo(0, 0);
   };
 
+  if (!contactData) {
+    return (
+      <div className="fixed flex px-2 top-0 w-full h-16 sm:h-32 bg-black/80 backdrop-blur-sm z-[9999] border-b border-gray-800">
+        <div className="flex grow mx-auto justify-between items-center max-w-[1200px]">
+          <Link href="/" onClick={handleLinkClick}>
+            <Image
+              src="/pngs/whiteLogo.png"
+              alt="Logo"
+              width={80}
+              height={80}
+              className="h-14 sm:h-16 md:h-20 w-auto hover:scale-105 transition-transform duration-200 cursor-pointer"
+            />
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="fixed flex px-2 top-0 w-full h-16 sm:h-32 bg-black/80 backdrop-blur-sm z-[9999] border-b border-gray-800">
         <div className="flex grow mx-auto justify-between items-center max-w-[1200px]">
           {/* Logo */}
           <Link href="/" onClick={handleLinkClick}>
-            <img
+            <Image
               src="/pngs/whiteLogo.png"
               alt="Logo"
+              width={80}
+              height={80}
               className="h-14 sm:h-16 md:h-20 w-auto hover:scale-105 transition-transform duration-200 cursor-pointer"
             />
           </Link>
@@ -106,34 +142,34 @@ const Header = () => {
           {/* Desktop Socials */}
           <div className="hidden md:flex items-center gap-4">
             <a
-              href="https://discord.gg/your-discord"
+              href={contactData.discord}
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaDiscord className="w-6 h-6 text-white hover:text-gray-300 transition-colors duration-200" />
             </a>
             <a
-              href="https://twitch.tv/your-twitch"
+              href={contactData.twitch}
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaTwitch className="w-6 h-6 text-white hover:text-gray-300 transition-colors duration-200" />
             </a>
             <a
-              href="https://youtube.com/your-youtube"
+              href={contactData.youtube}
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaYoutube className="w-6 h-6 text-white hover:text-gray-300 transition-colors duration-200" />
             </a>
             <a
-              href="https://twitter.com/your-twitter"
+              href={contactData.twitter}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaTwitter className="w-6 h-6 text-white hover:text-gray-300 transition-colors duration-200" />
+              <FaXTwitter className="w-6 h-6 text-white hover:text-gray-300 transition-colors duration-200" />
             </a>
-            <a href="mailto:your-email@example.com">
+            <a href={`mailto:${contactData.email}`}>
               <FaEnvelope className="w-6 h-6 text-white hover:text-gray-300 transition-colors duration-200" />
             </a>
           </div>
@@ -199,34 +235,34 @@ const Header = () => {
 
           <div className="flex gap-8 mt-8">
             <a
-              href="https://discord.gg/your-discord"
+              href={contactData.discord}
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaDiscord className="w-8 h-8 text-white hover:text-gray-300 transition-colors duration-200" />
             </a>
             <a
-              href="https://twitch.tv/your-twitch"
+              href={contactData.twitch}
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaTwitch className="w-8 h-8 text-white hover:text-gray-300 transition-colors duration-200" />
             </a>
             <a
-              href="https://youtube.com/your-youtube"
+              href={contactData.youtube}
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaYoutube className="w-8 h-8 text-white hover:text-gray-300 transition-colors duration-200" />
             </a>
             <a
-              href="https://twitter.com/your-twitter"
+              href={contactData.twitter}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaTwitter className="w-8 h-8 text-white hover:text-gray-300 transition-colors duration-200" />
+              <FaXTwitter className="w-8 h-8 text-white hover:text-gray-300 transition-colors duration-200" />
             </a>
-            <a href="mailto:your-email@example.com">
+            <a href={`mailto:${contactData.email}`}>
               <FaEnvelope className="w-8 h-8 text-white hover:text-gray-300 transition-colors duration-200" />
             </a>
           </div>

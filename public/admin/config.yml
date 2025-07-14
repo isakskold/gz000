@@ -1,0 +1,283 @@
+backend:
+  name: git-gateway
+  branch: main # or master, depending on your default branch
+  roles: [admin, editor]
+
+# This line should *not* be indented
+media_folder: "public/images/uploads" # Media files will be stored here
+public_folder: "/images/uploads" # The src attribute for uploaded media
+
+collections:
+  - name: "bio"
+    label: "Bio"
+    folder: "content/bio"
+    create: false
+    delete: false
+    format: "frontmatter"
+    fields:
+      - { label: "Title", name: "title", widget: "hidden", default: "Bio" }
+      - {
+          label: "Bio Text",
+          name: "bioText",
+          widget: "text",
+          hint: "Biography text",
+        }
+
+  - name: "contact"
+    label: "Contact Information"
+    folder: "content/contact"
+    create: false
+    delete: false
+    format: "frontmatter"
+    fields:
+      - {
+          label: "Title",
+          name: "title",
+          widget: "hidden",
+          default: "Contact Information",
+        }
+      - {
+          label: "Discord",
+          name: "discord",
+          widget: "string",
+          hint: "Discord invite link or username#1234",
+        }
+      - {
+          label: "YouTube",
+          name: "youtube",
+          widget: "string",
+          hint: "Full YouTube channel URL",
+        }
+      - {
+          label: "Email",
+          name: "email",
+          widget: "string",
+          hint: "Contact email address",
+        }
+      - {
+          label: "Twitch",
+          name: "twitch",
+          widget: "string",
+          hint: "Full Twitch channel URL",
+        }
+      - {
+          label: "Twitter",
+          name: "twitter",
+          widget: "string",
+          hint: "Full Twitter profile URL",
+        }
+
+  - name: "tournaments"
+    label: "Tournaments"
+    folder: "content/tournaments"
+    create: true
+    format: "frontmatter"
+    fields:
+      - { label: "Type", name: "type", widget: "hidden", default: "tournament" }
+      - { label: "Name", name: "name", widget: "string" }
+      - {
+          label: "Date",
+          name: "date",
+          widget: "datetime",
+          format: "YYYY-MM-DD HH:mm",
+          time_format: true,
+        }
+      - {
+          label: "Prize Pool",
+          name: "prizePool",
+          widget: "number",
+          hint: "Amount in dollars",
+        }
+      - { label: "Max Participants", name: "maxParticipants", widget: "number" }
+      - {
+          label: "Registration Open",
+          name: "open",
+          widget: "boolean",
+          default: true,
+        }
+      - {
+          label: "Tournament URL",
+          name: "url",
+          widget: "string",
+          required: false,
+          hint: "Optional tournament registration link",
+        }
+
+  - name: "showmatches_1v1"
+    label: "Showmatches 1v1"
+    folder: "content/showmatches_1v1"
+    create: true
+    format: "frontmatter"
+    fields:
+      - {
+          label: "Title",
+          name: "title",
+          widget: "string",
+          hint: "Enter a name for this showmatch (e.g. Player1 vs Player2)",
+        }
+      - {
+          label: "Date",
+          name: "date",
+          widget: "datetime",
+          format: "YYYY-MM-DD HH:mm",
+          time_format: true,
+        }
+      - {
+          label: "Prize Pool",
+          name: "prizePool",
+          widget: "number",
+          hint: "Amount in dollars",
+        }
+      - label: "Team 1"
+        name: "team1"
+        widget: "object"
+        fields:
+          - label: "Player"
+            name: "player"
+            widget: "string"
+      - label: "Team 2"
+        name: "team2"
+        widget: "object"
+        fields:
+          - label: "Player"
+            name: "player"
+            widget: "string"
+
+  - name: "showmatches_2v2"
+    label: "Showmatches 2v2"
+    folder: "content/showmatches_2v2"
+    create: true
+    format: "frontmatter"
+    fields:
+      - {
+          label: "Title",
+          name: "title",
+          widget: "string",
+          hint: "Enter a name for this showmatch (e.g. Team1 vs Team2)",
+        }
+      - {
+          label: "Date",
+          name: "date",
+          widget: "datetime",
+          format: "YYYY-MM-DD HH:mm",
+          time_format: true,
+        }
+      - {
+          label: "Prize Pool",
+          name: "prizePool",
+          widget: "number",
+          hint: "Amount in dollars",
+        }
+      - label: "Team 1"
+        name: "team1"
+        widget: "object"
+        fields:
+          - label: "Player 1"
+            name: "player1"
+            widget: "string"
+          - label: "Player 2"
+            name: "player2"
+            widget: "string"
+      - label: "Team 2"
+        name: "team2"
+        widget: "object"
+        fields:
+          - label: "Player 1"
+            name: "player1"
+            widget: "string"
+          - label: "Player 2"
+            name: "player2"
+            widget: "string"
+
+  - name: "showmatches_3v3"
+    label: "Showmatches 3v3"
+    folder: "content/showmatches_3v3"
+    create: true
+    format: "frontmatter"
+    fields:
+      - {
+          label: "Title",
+          name: "title",
+          widget: "string",
+          hint: "Enter a name for this showmatch (e.g. Team1 vs Team2)",
+        }
+      - {
+          label: "Date",
+          name: "date",
+          widget: "datetime",
+          format: "YYYY-MM-DD HH:mm",
+          time_format: true,
+        }
+      - {
+          label: "Prize Pool",
+          name: "prizePool",
+          widget: "number",
+          hint: "Amount in dollars",
+        }
+      - label: "Team 1"
+        name: "team1"
+        widget: "object"
+        fields:
+          - label: "Team Name"
+            name: "name"
+            widget: "string"
+          - label: "Player 1"
+            name: "player1"
+            widget: "string"
+          - label: "Player 2"
+            name: "player2"
+            widget: "string"
+          - label: "Player 3"
+            name: "player3"
+            widget: "string"
+      - label: "Team 2"
+        name: "team2"
+        widget: "object"
+        fields:
+          - label: "Team Name"
+            name: "name"
+            widget: "string"
+          - label: "Player 1"
+            name: "player1"
+            widget: "string"
+          - label: "Player 2"
+            name: "player2"
+            widget: "string"
+          - label: "Player 3"
+            name: "player3"
+            widget: "string"
+
+  - name: "leaderboard"
+    label: "Leaderboard"
+    folder: "content/leaderboard"
+    create: false
+    delete: false
+    format: "frontmatter"
+    fields:
+      - {
+          label: "Title",
+          name: "title",
+          widget: "hidden",
+          default: "Leaderboard",
+        }
+      - label: "Players"
+        name: "leaderboardData"
+        widget: "list"
+        fields:
+          - { label: "Player Name", name: "name", widget: "string" }
+          - { label: "Wins", name: "wins", widget: "number" }
+
+  - name: "timeline"
+    label: "Timeline"
+    folder: "content/timeline"
+    create: true
+    format: "frontmatter"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - {
+          label: "Date",
+          name: "date",
+          widget: "datetime",
+          format: "YYYY-MM-DD",
+        }
+      - { label: "Information", name: "info", widget: "text" }

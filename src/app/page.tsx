@@ -1,15 +1,17 @@
-import maxWidth from "@/const/maxWidth";
 import DiscordButton from "@/components/DiscordButton";
+import Image from "next/image";
 
-interface Props {}
+type Props = Record<string, never>;
 
 const page: React.FC<Props> = () => {
   return (
     <div className="w-full flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] px-4">
       <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 w-full max-w-[800px]">
-        <img
+        <Image
           src="/pngs/whiteLogoShadowed.png"
           alt="Shadowed Logo"
+          width={300}
+          height={300}
           className="h-auto w-[clamp(10rem,8rem+5vw,18.75rem)]"
           style={{
             filter:

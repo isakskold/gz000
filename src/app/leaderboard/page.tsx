@@ -1,6 +1,16 @@
-import { leaderboardData } from "@/data/leaderboard";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 import PageHeader from "@/components/PageHeader";
 import LeaderboardItem from "./components/LeaderboardItem";
+
+const leaderboardFile = path.join(
+  process.cwd(),
+  "content/leaderboard/leaderboard.md"
+);
+const file = fs.readFileSync(leaderboardFile, "utf8");
+const { data } = matter(file);
+const leaderboardData = data.leaderboardData || [];
 
 const Page = () => {
   // Sort players by wins in descending order

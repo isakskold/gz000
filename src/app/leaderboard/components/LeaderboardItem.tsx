@@ -1,4 +1,4 @@
-import { LeaderboardPlayer } from "@/data/leaderboard";
+import { LeaderboardPlayer } from "@/types/leaderboard";
 
 interface Props {
   player: LeaderboardPlayer;
