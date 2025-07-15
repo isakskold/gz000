@@ -1,84 +1,136 @@
-"use client";
-
-import { useState, useEffect } from "react";
-import { FaDiscord, FaTwitch, FaYoutube, FaEnvelope } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
-import { ContactDataType } from "@/types/contact";
+import { Button } from "@/components/ui/button";
+import { Twitch, Youtube, Twitter, Instagram, Mail, Heart } from "lucide-react";
 
 const Footer = () => {
-  const [contactData, setContactData] = useState<ContactDataType | null>(null);
+  const socialLinks = [
+    { name: "Twitch", icon: Twitch, url: "#", color: "hover:text-purple-400" },
+    { name: "YouTube", icon: Youtube, url: "#", color: "hover:text-red-400" },
+    { name: "Twitter", icon: Twitter, url: "#", color: "hover:text-blue-400" },
+    {
+      name: "Instagram",
+      icon: Instagram,
+      url: "#",
+      color: "hover:text-pink-400",
+    },
+    { name: "Email", icon: Mail, url: "#", color: "hover:text-green-400" },
+  ];
 
-  useEffect(() => {
-    const fetchContactData = async () => {
-      try {
-        const response = await fetch("/api/contact");
-        if (!response.ok) throw new Error("Failed to fetch contact data");
-        const data = await response.json();
-        setContactData(data);
-      } catch (error) {
-        console.error("Error fetching contact data:", error);
-      }
-    };
-
-    fetchContactData();
-  }, []);
-
-  if (!contactData) return null;
-
-  const currentYear = new Date().getFullYear();
+  const quickLinks = [
+    { name: "Live Stream", href: "#stream" },
+    { name: "Latest Videos", href: "#videos" },
+    { name: "Leaderboard", href: "#leaderboard" },
+    { name: "About", href: "#about" },
+  ];
 
   return (
-    <footer className="w-full bg-black/90 backdrop-blur-md relative">
-      {/* Blurred edges */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black/90 backdrop-blur-sm" />
+    <footer className="bg-slate-800 border-t border-slate-700">
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid md:grid-cols-4 gap-8">
+          {/* Brand */}
+          <div className="space-y-4">
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-gradient-to-r from-sky-400 to-orange-400 rounded-lg flex items-center justify-center">
+                <span className="text-slate-900 font-bold text-lg">G</span>
+              </div>
+              <span className="text-2xl font-bold gradient-text">
+                GroundZero000
+              </span>
+            </div>
+            <p className="text-gray-300 text-sm">
+              Professional Rocket League content creator helping players improve
+              their skills and climb the ranks.
+            </p>
+            <div className="flex space-x-3">
+              {socialLinks.map((link) => (
+                <Button
+                  key={link.name}
+                  variant="ghost"
+                  size="icon"
+                  className={`hover:bg-slate-700 ${link.color} transition-colors`}
+                >
+                  <link.icon className="w-5 h-5" />
+                </Button>
+              ))}
+            </div>
+          </div>
 
-      {/* Content */}
-      <div className="relative flex flex-col items-center justify-center gap-8 py-8 px-4 max-w-[800px] mx-auto">
-        {/* Social Links */}
-        <div className="flex gap-6">
-          <a
-            href={contactData.discord}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-400 hover:text-[#00aaff] transition-colors duration-200"
-          >
-            <FaDiscord className="w-6 h-6" />
-          </a>
-          <a
-            href={contactData.twitch}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-400 hover:text-[#00aaff] transition-colors duration-200"
-          >
-            <FaTwitch className="w-6 h-6" />
-          </a>
-          <a
-            href={contactData.youtube}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-400 hover:text-[#00aaff] transition-colors duration-200"
-          >
-            <FaYoutube className="w-6 h-6" />
-          </a>
-          <a
-            href={contactData.twitter}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-400 hover:text-[#00aaff] transition-colors duration-200"
-          >
-            <FaXTwitter className="w-6 h-6" />
-          </a>
-          <a
-            href={`mailto:${contactData.email}`}
-            className="text-gray-400 hover:text-[#00aaff] transition-colors duration-200"
-          >
-            <FaEnvelope className="w-6 h-6" />
-          </a>
+          {/* Quick Links */}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-lg text-white">Quick Links</h3>
+            <div className="space-y-2">
+              {quickLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="block text-gray-300 hover:text-white transition-colors"
+                >
+                  {link.name}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Content */}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-lg text-white">Content</h3>
+            <div className="space-y-2">
+              <a
+                href="#"
+                className="block text-gray-300 hover:text-white transition-colors"
+              >
+                Tutorials
+              </a>
+              <a
+                href="#"
+                className="block text-gray-300 hover:text-white transition-colors"
+              >
+                Gameplay Analysis
+              </a>
+              <a
+                href="#"
+                className="block text-gray-300 hover:text-white transition-colors"
+              >
+                Highlight Reels
+              </a>
+              <a
+                href="#"
+                className="block text-gray-300 hover:text-white transition-colors"
+              >
+                Live Streams
+              </a>
+            </div>
+          </div>
+
+          {/* Newsletter */}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-lg text-white">Stay Updated</h3>
+            <p className="text-gray-300 text-sm">
+              Get notified about new videos, stream schedules, and exclusive
+              content.
+            </p>
+            <div className="space-y-2">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 text-white placeholder-gray-400"
+              />
+              <Button className="w-full bg-sky-400 hover:bg-sky-500 text-slate-900">
+                Subscribe
+              </Button>
+            </div>
+          </div>
         </div>
 
-        {/* Copyright */}
-        <div className="text-gray-500 text-sm font-rajdhani">
-          © {currentYear} GroundZero000
+        {/* Bottom Bar */}
+        <div className="mt-12 pt-8 border-t border-slate-700 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <div className="flex items-center space-x-1 text-gray-300 text-sm">
+            <span>Made with</span>
+            <Heart className="w-4 h-4 text-red-500" />
+            <span>for the Rocket League community</span>
+          </div>
+          <div className="text-gray-300 text-sm">
+            © 2024 GroundZero000. All rights reserved.
+          </div>
         </div>
       </div>
     </footer>

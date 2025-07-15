@@ -1,613 +1,143 @@
-/* ===============================================
-   1. Imports
-=============================================== */
 @import "tailwindcss";
-@import "tw-animate-css";
 
-/* ===============================================
-   2. Custom Variants & Global Body Styles
-=============================================== */
-@custom-variant dark (&:is(.dark *));
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-    to bottom,
-    rgb(var(--background-start-rgb)),
-    rgb(var(--background-end-rgb))
-  );
-}
+/* Rocket League inspired design system */
+@layer base {
+  :root {
+    --background: 220 27% 8%;
+    --foreground: 0 0% 95%;
 
-/* Custom media query for large screens with sufficient height */
-@media (min-width: 1024px) and (min-height: 800px) {
-  .show-discord-button {
-    display: block !important;
+    --card: 220 27% 12%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 220 27% 12%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 204 70% 45%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 220 27% 16%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 220 27% 16%;
+    --muted-foreground: 0 0% 70%;
+
+    --accent: 210 50% 35%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 95%;
+
+    --border: 220 27% 15%;
+    --input: 220 27% 16%;
+    --ring: 204 30% 35%;
+
+    --radius: 0.5rem;
+  }
+
+  body {
+    background-color: hsl(220 27% 8%);
+    color: hsl(0 0% 95%);
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Rajdhani", sans-serif;
+    font-weight: 700;
   }
 }
 
-/* Custom media query for viewport height */
-@media (min-height: 800px) {
-  .lg\:block {
-    display: block;
-  }
-}
-
-/* ===============================================
-   3. Theme Variables (Custom Fonts)
-=============================================== */
-/* Load your theme (like fonts and other customizations) */
-@theme {
-  --font-orbitron: "Orbitron", sans-serif;
-  --font-rajdhani: "Rajdhani", sans-serif;
-  --font-oxanium: "Oxanium", sans-serif;
-  --font-giestMono: "GiestMono", sans-serif;
-}
-
-/* ===============================================
-   4. Custom Utilities & Breakpoints
-=============================================== */
-@layer utilities {
-  /* Define a custom breakpoint at 1050px */
-  @media (min-width: 1100px) {
-    .lg2\:text-7xl {
-      font-size: 4.5rem; /* Equivalent to text-7xl */
-      line-height: 1;
-    }
-  }
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
-/* ===============================================
-   5. Keyframes (Animations)
-=============================================== */
-
-/* Typewriter Animation */
-@keyframes typewriter {
-  0% {
-    width: 0;
-  }
-  99% {
-    border-right: 3px solid #fff;
-  }
+/* Custom animations */
+@keyframes glow {
+  0%,
   100% {
-    width: 100%;
-    border-right: none;
-  }
-}
-
-/* Custom Keyframes for sliding in from the top */
-@keyframes slide-in-from-top {
-  0% {
-    opacity: 0;
-    transform: translateY(-55px); /* Start from top */
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Progress bar animation */
-@keyframes fillBar {
-  from {
-    height: 0%;
-  }
-  to {
-    height: 100%;
-  }
-}
-
-/* Event Card Animation */
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Add this to the Keyframes section */
-@keyframes gradient-x {
-  0% {
-    background-position: 0% 50%;
+    box-shadow: 0 2px 8px hsl(var(--primary) / 0.15);
   }
   50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
+    box-shadow: 0 4px 12px hsl(var(--primary) / 0.25),
+      0 2px 8px hsl(var(--primary) / 0.15);
   }
 }
 
-/* ===============================================
-   6. Animation Utility Classes
-=============================================== */
-
-/* Progress Bar Fill Animation */
-.progress-bar-fill {
-  animation: fillBar 4000ms linear forwards;
-}
-
-/* Apply the slide-in animation */
-.animate-slide-in-top {
-  animation: slide-in-from-top 0.5s ease-out forwards;
-  opacity: 0; /* Hide the element initially */
-}
-
-/* Apply typewriter animation to a specific class */
-.typewriter {
-  overflow: hidden; /* Hide the text as it animates */
-  white-space: nowrap; /* Prevent text from wrapping */
-  border-right: 3px solid #fff; /* Cursor effect */
-  animation: typewriter 2.5s steps(30) 0s 1 normal both; /* Adjust timing and steps for effect */
-}
-
-/* Apply event fade animation */
-.animate-event-fade {
-  animation: fade-in 0.5s ease-out forwards;
-  opacity: 0;
-}
-
-/* Apply gradient x animation */
-.animate-gradient-x {
-  background-size: 200% 200%;
-  animation: gradient-x 15s ease infinite;
-}
-
-/* ===============================================
-   7. Custom Scrollbar Styles
-=============================================== */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(0, 31, 51, 0.3);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
-  border: 2px solid rgba(0, 31, 51, 0.3);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-/* Add a subtle glow effect to the scrollbar */
-::-webkit-scrollbar-thumb:active {
-  background: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 0 5px rgba(0, 170, 255, 0.2);
-}
-
-/* ===============================================
-   8. Font Face Declarations
-=============================================== */
-@font-face {
-  font-family: "Orbitron";
-  src: url("/fonts/Orbitron-VariableFont_wght.woff") format("woff");
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Rajdhani";
-  src: url("/fonts/Rajdhani-SemiBold.woff") format("woff");
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Oxanium";
-  src: url("/fonts/Oxanium-VariableFont_wght.woff") format("woff");
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "GiestMono";
-  src: url("/fonts/GiestMono-VariableFont_wght.woff") format("woff");
-  font-style: normal;
-}
-
-/* ===============================================
-   9. Text Effects
-=============================================== */
-.text-stroke {
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
-    1px 1px 0 #000; /* Stroke effect */
-}
-
-.text-shadow {
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-/* ===============================================
-   10. Element Specific Styles
-=============================================== */
-h1 {
-  padding: 0.5rem;
-  font-family: "Oxanium", sans-serif;
-  text-shadow: 0 0 20px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 0, 0, 0.7);
-  letter-spacing: 0.05em;
-}
-
-h2 {
-  font-family: "GiestMono", monospace;
-  text-shadow: 0 0 15px rgba(0, 0, 0, 0.5), 0 0 5px rgba(0, 0, 0, 0.7);
-  letter-spacing: 0.03em;
-}
-
-p,
-span,
-tr {
-  font-family: "Rajdhani", sans-serif;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5), 0 0 5px rgba(0, 0, 0, 0.7);
-}
-
-/* ===============================================
-   11. Global Theme Colors & Variables
-=============================================== */
-:root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 31, 51;
-  --background-end-rgb: 0, 119, 170;
-}
-
-.dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
-}
-
-/* ===============================================
-   12. Theme Inline Variables (Utility for Components)
-=============================================== */
-@theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-}
-
-/* ===============================================
-   13. Base Styles
-=============================================== */
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.animate-fade {
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-/* Smooth transitions */
-* {
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-}
-
-/* Glow effects */
-.glow {
-  box-shadow: 0 0 15px rgba(0, 170, 255, 0.3), 0 0 30px rgba(0, 170, 255, 0.2),
-    0 0 45px rgba(0, 170, 255, 0.1);
-}
-
-.glow:hover {
-  box-shadow: 0 0 20px rgba(0, 170, 255, 0.4), 0 0 40px rgba(0, 170, 255, 0.3),
-    0 0 60px rgba(0, 170, 255, 0.2);
-}
-
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(45deg, #00aaff, #0077aa);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Animated background elements */
 @keyframes float {
-  0% {
+  0%,
+  100% {
     transform: translateY(0px);
   }
   50% {
     transform: translateY(-10px);
   }
-  100% {
-    transform: translateY(0px);
+}
+
+.glow-effect {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Subtle shadow utilities */
+.subtle-shadow {
+  box-shadow: 0 1px 3px hsl(204 30% 35% / 0.08),
+    0 1px 2px hsl(204 30% 35% / 0.06);
+}
+
+.subtle-shadow-lg {
+  box-shadow: 0 2px 6px hsl(204 30% 35% / 0.1),
+    0 1px 3px hsl(204 30% 35% / 0.08);
+}
+
+/* Global overrides for muted design */
+@layer components {
+  /* Remove bright borders from cards and components */
+  [data-slot="card"] {
+    border-color: hsl(var(--border)) !important;
+  }
+
+  /* Muted button outline variants */
+  button[data-slot="button"] {
+    border-color: hsl(var(--border)) !important;
+  }
+
+  /* Override bright hover colors */
+  .hover\:bg-accent:hover,
+  .hover\:bg-primary\/20:hover,
+  .hover\:bg-accent\/20:hover {
+    background-color: hsl(var(--secondary)) !important;
+  }
+
+  .hover\:text-accent-foreground:hover {
+    color: hsl(var(--foreground)) !important;
   }
 }
 
-.float {
-  animation: float 6s ease-in-out infinite;
+.float-effect {
+  animation: float 3s ease-in-out infinite;
 }
 
-/* Card hover effects */
-.card-hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card-hover:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-/* Button styles */
-.btn {
-  @apply px-4 py-2 rounded-lg font-medium transition-all duration-300;
-}
-
-.btn-primary {
-  @apply bg-[#00aaff] text-black hover:bg-[#0077aa] hover:text-white;
-}
-
-.btn-secondary {
-  @apply bg-transparent border border-[#00aaff] text-[#00aaff] hover:bg-[#00aaff] hover:text-black;
-}
-
-/* Input styles */
-.input {
-  @apply bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#00aaff] transition-colors;
-}
-
-/* Link styles */
-.link {
-  @apply text-[#00aaff] hover:text-[#0077aa] transition-colors;
-}
-
-/* Container styles */
-.container {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-}
-
-/* Section styles */
-.section {
-  @apply py-12 md:py-24;
-}
-
-/* Grid styles */
-.grid {
-  @apply grid gap-6 md:gap-8;
-}
-
-.grid-cols-1 {
-  @apply grid-cols-1;
-}
-
-.grid-cols-2 {
-  @apply grid-cols-1 md:grid-cols-2;
-}
-
-.grid-cols-3 {
-  @apply grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
-}
-
-.grid-cols-4 {
-  @apply grid-cols-1 md:grid-cols-2 lg:grid-cols-4;
-}
-
-/* Flex styles */
-.flex-center {
-  @apply flex items-center justify-center;
-}
-
-.flex-between {
-  @apply flex items-center justify-between;
-}
-
-.flex-start {
-  @apply flex items-center justify-start;
-}
-
-.flex-end {
-  @apply flex items-center justify-end;
-}
-
-/* Text styles */
-.text-gradient {
-  @apply bg-gradient-to-r from-[#00aaff] to-[#0077aa] bg-clip-text text-transparent;
-}
-
-/* Animation delays */
-.delay-100 {
-  animation-delay: 100ms;
-}
-
-.delay-200 {
-  animation-delay: 200ms;
-}
-
-.delay-300 {
-  animation-delay: 300ms;
-}
-
-.delay-400 {
-  animation-delay: 400ms;
-}
-
-.delay-500 {
-  animation-delay: 500ms;
-}
-
-/* Add gradient text variations */
-.gradient-text-primary {
-  background: linear-gradient(45deg, #00aaff, #0077aa);
+/* Gradient text effect */
+.gradient-text {
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.gradient-text-secondary {
-  background: linear-gradient(45deg, #0077aa, #00aaff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-.gradient-text-accent {
-  background: linear-gradient(45deg, #00aaff, #003f66);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
 }
 
-/* Add gradient border effects */
-.gradient-border {
-  position: relative;
-  background: linear-gradient(45deg, #00aaff, #0077aa);
-  padding: 1px;
-  border-radius: 0.625rem;
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
+  border-radius: 4px;
 }
 
-.gradient-border::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 0.625rem;
-  padding: 1px;
-  background: linear-gradient(45deg, #00aaff, #0077aa);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-}
-
-/* Add gradient button variations */
-.btn-gradient {
-  background: linear-gradient(45deg, #00aaff, #0077aa);
-  color: white;
-  transition: all 0.3s ease;
-}
-
-.btn-gradient:hover {
-  background: linear-gradient(45deg, #0077aa, #00aaff);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 170, 255, 0.3);
-}
-
-/* Add gradient card effects */
-.gradient-card {
-  background: linear-gradient(
-    135deg,
-    rgba(0, 31, 51, 0.8),
-    rgba(0, 63, 102, 0.8)
-  );
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(0, 170, 255, 0.1);
-}
-
-.gradient-card:hover {
-  background: linear-gradient(
-    135deg,
-    rgba(0, 63, 102, 0.8),
-    rgba(0, 31, 51, 0.8)
-  );
-  border-color: rgba(0, 170, 255, 0.3);
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--accent));
 }
