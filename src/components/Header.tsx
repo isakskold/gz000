@@ -15,8 +15,8 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-slate-900">
-      <div className="container mx-auto px-4 py-4">
+    <header className="fixed px-4 top-0 w-full z-50 bg-slate-900">
+      <div className="container mx-auto py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-2">
@@ -38,13 +38,6 @@ const Header = () => {
               </a>
             ))}
           </nav>
-
-          {/* CTA Button */}
-          <div className="hidden md:block">
-            <Button className="bg-primary hover:bg-primary/90 subtle-shadow">
-              Follow Stream
-            </Button>
-          </div>
 
           {/* Mobile Menu Button */}
           <Button
@@ -76,9 +69,6 @@ const Header = () => {
                   <span className="font-medium">{item.name}</span>
                 </a>
               ))}
-              <Button className="w-full bg-primary hover:bg-primary/90 mt-4">
-                Follow Stream
-              </Button>
             </div>
           </nav>
         )}
