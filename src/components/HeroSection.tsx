@@ -44,7 +44,7 @@ const HeroSection = () => {
           <div className="relative">
             <div className="overflow-hidden rounded-lg border border-border/30 subtle-shadow-lg">
               <iframe
-                src="https://player.twitch.tv/?channel=groundzero00&parent=localhost"
+                src="https://player.twitch.tv/?channel=groundzero000&parent=localhost"
                 frameBorder="0"
                 allowFullScreen={true}
                 scrolling="no"
