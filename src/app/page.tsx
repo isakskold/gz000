@@ -9,7 +9,7 @@ const page = () => {
   return (
     <div className="min-h-screen bg-slate-900">
       <Header />
-      <div className="pt-20">
+      <div className="pt-17">
         <HeroSection />
         <YouTubeSection />
         <LeaderboardSection />
