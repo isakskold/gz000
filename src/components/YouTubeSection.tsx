@@ -171,8 +171,10 @@ const YouTubeSection = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="-left-12 border-border/50 text-foreground hover:bg-secondary/50 subtle-shadow" />
-            <CarouselNext className="-right-12 border-border/50 text-foreground hover:bg-secondary/50 subtle-shadow" />
+
+            {/* Navigation arrows positioned over content */}
+            <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/60 hover:bg-black/80 border-white/20 text-white shadow-lg" />
+            <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/60 hover:bg-black/80 border-white/20 text-white shadow-lg" />
           </Carousel>
         </div>
 
