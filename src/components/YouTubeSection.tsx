@@ -1,3 +1,5 @@
+"use client";
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -9,85 +11,151 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Play, Eye, Clock, ExternalLink } from "lucide-react";
+import { useState, useEffect } from "react";
+import { YouTubeVideo } from "@/lib/youtube";
+
+interface VideoDisplayData {
+  id: string;
+  title: string;
+  thumbnail: string;
+  duration?: string;
+  uploadDate: string;
+  videoId: string;
+  url: string;
+  description: string;
+}
 
 const YouTubeSection = () => {
-  const videos = [
+  const [videos, setVideos] = useState<VideoDisplayData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fallback static data in case API fails
+  const fallbackVideos: VideoDisplayData[] = [
     {
-      id: 1,
+      id: "1",
       title: "How I Hit Grand Champion in 1v1s - Complete Guide",
       thumbnail:
         "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&h=400&fit=crop",
-      views: "125K",
       duration: "15:42",
       uploadDate: "3 days ago",
-      type: "Tutorial",
+      videoId: "example1",
+      url: "https://youtube.com/watch?v=example1",
+      description:
+        "In this comprehensive tutorial, I'll show you exactly how I climbed from Diamond to Grand Champion in 1v1s. Learn the key mechanics, positioning strategies, and mental approach that will transform your gameplay.",
     },
     {
-      id: 2,
+      id: "2",
       title: "INSANE Ceiling Shot Compilation - Best Goals of 2024",
       thumbnail:
         "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?w=600&h=400&fit=crop",
-      views: "89K",
       duration: "8:34",
       uploadDate: "1 week ago",
-      type: "Highlights",
+      videoId: "example2",
+      url: "https://youtube.com/watch?v=example2",
+      description:
+        "A compilation of the most incredible ceiling shots and aerial plays from my recent ranked sessions. These clips showcase advanced mechanics and creativity in Rocket League.",
     },
     {
-      id: 3,
+      id: "3",
       title: "Analyzing Pro Player Gameplay - What Makes Them Different",
       thumbnail:
         "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=600&h=400&fit=crop",
-      views: "67K",
       duration: "12:18",
       uploadDate: "2 weeks ago",
-      type: "Analysis",
-    },
-    {
-      id: 4,
-      title: "Road to SSL - Episode 12: The Hardest Rank Push Yet",
-      thumbnail:
-        "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&h=400&fit=crop",
-      views: "156K",
-      duration: "22:15",
-      uploadDate: "3 weeks ago",
-      type: "Series",
-    },
-    {
-      id: 5,
-      title: "Freestyle Friday - Impossible Goals Compilation",
-      thumbnail:
-        "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&h=400&fit=crop",
-      views: "94K",
-      duration: "11:35",
-      uploadDate: "1 month ago",
-      type: "Highlights",
-    },
-    {
-      id: 6,
-      title: "Ranking Every Rocket League Car from Worst to Best",
-      thumbnail:
-        "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&h=400&fit=crop",
-      views: "203K",
-      duration: "18:47",
-      uploadDate: "1 month ago",
-      type: "Analysis",
+      videoId: "example3",
+      url: "https://youtube.com/watch?v=example3",
+      description:
+        "Breaking down professional Rocket League gameplay to understand the subtle differences that separate pros from casual players. Learn their decision-making process and positioning.",
     },
   ];
 
-  const getTypeColor = (type: string) => {
-    switch (type) {
-      case "Tutorial":
-        return "bg-primary/20 text-primary";
-      case "Highlights":
-        return "bg-accent/20 text-accent";
-      case "Analysis":
-        return "bg-purple-500/20 text-purple-400";
-      case "Series":
-        return "bg-green-500/20 text-green-400";
-      default:
-        return "bg-secondary text-secondary-foreground";
-    }
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("/api/youtube?maxResults=6");
+        const data = await response.json();
+
+        if (data.success && data.videos.length > 0) {
+          const formattedVideos: VideoDisplayData[] = data.videos.map(
+            (video: YouTubeVideo) => ({
+              id: video.id,
+              title: video.title,
+              thumbnail: video.thumbnail,
+              uploadDate: formatDate(video.publishedAt),
+              videoId: video.videoId,
+              url: `https://youtube.com/watch?v=${video.videoId}`,
+              description: video.description,
+            })
+          );
+          setVideos(formattedVideos);
+        } else {
+          console.warn("No videos returned from API, using fallback data");
+          setVideos(fallbackVideos);
+        }
+      } catch (err) {
+        console.error("Error fetching YouTube videos:", err);
+        setError("Failed to load videos");
+        setVideos(fallbackVideos);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchVideos();
+  }, []);
+
+  const formatDate = (dateString: string): string => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffTime = Math.abs(now.getTime() - date.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 1) return "1 day ago";
+    if (diffDays < 7) return `${diffDays} days ago`;
+    if (diffDays < 30)
+      return `${Math.floor(diffDays / 7)} week${
+        Math.floor(diffDays / 7) > 1 ? "s" : ""
+      } ago`;
+    if (diffDays < 365)
+      return `${Math.floor(diffDays / 30)} month${
+        Math.floor(diffDays / 30) > 1 ? "s" : ""
+      } ago`;
+    return `${Math.floor(diffDays / 365)} year${
+      Math.floor(diffDays / 365) > 1 ? "s" : ""
+    } ago`;
   };
+
+  const truncateDescription = (
+    description: string,
+    maxLength: number = 120
+  ): string => {
+    if (!description) return "";
+    if (description.length <= maxLength) return description;
+    return description.substring(0, maxLength).trim() + "...";
+  };
+
+  const handleVideoClick = (video: VideoDisplayData) => {
+    window.open(video.url, "_blank", "noopener,noreferrer");
+  };
+
+  if (loading) {
+    return (
+      <section id="videos" className="py-16 px-4 bg-secondary-section">
+        <div className="container mx-auto">
+          <div className="text-center space-y-4 mb-12">
+            <h2 className="text-4xl lg:text-5xl font-bold">
+              Latest <span className="gradient-text">YouTube</span> Videos
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Loading latest videos...
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="videos" className="py-16 px-4 bg-secondary-section">
@@ -98,9 +166,15 @@ const YouTubeSection = () => {
             Latest <span className="gradient-text">YouTube</span> Videos
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            In-depth tutorials, gameplay analysis, and highlight reels to help
-            you improve your Rocket League skills
+            Live streams, gameplay content, and entertaining Rocket League
+            videos covering everything from casual matches to competitive
+            casting
           </p>
+          {error && (
+            <p className="text-sm text-yellow-500">
+              Using cached content - {error}
+            </p>
+          )}
         </div>
 
         {/* Videos Carousel */}
@@ -110,61 +184,66 @@ const YouTubeSection = () => {
               align: "start",
               loop: true,
             }}
-            className="w-full"
+            className="w-full "
           >
-            <CarouselContent className="-ml-2 md:-ml-4">
+            <CarouselContent className="-ml-2 md:-ml-3 py-2">
               {videos.map((video) => (
                 <CarouselItem
                   key={video.id}
-                  className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3"
+                  className="md:basis-1/2 lg:basis-1/3"
                 >
-                  <Card className="group overflow-hidden bg-card border-border/50 hover:border-border transition-all duration-300 hover:shadow-lg subtle-shadow">
+                  <Card
+                    className="group overflow-hidden bg-card border-border/50 hover:border-border transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 subtle-shadow cursor-pointer h-full flex flex-col mx-2 md:mx-3"
+                    onClick={() => handleVideoClick(video)}
+                  >
                     <div className="relative overflow-hidden">
                       <img
                         src={video.thumbnail}
                         alt={video.title}
-                        className="w-full aspect-video object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="w-full aspect-video object-cover group-hover:scale-103 transition-transform duration-500"
                       />
 
-                      {/* Play overlay */}
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
-                        <div className="w-16 h-16 bg-primary/0 group-hover:bg-primary rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100">
-                          <Play className="w-6 h-6 text-white ml-1" />
+                      {/* Gradient overlay for better text readability */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                      {/* Enhanced Play overlay */}
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+                        <div className="w-20 h-20 bg-red-600/0 group-hover:bg-red-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100 shadow-lg">
+                          <Play className="w-8 h-8 text-white ml-1 fill-white" />
                         </div>
                       </div>
 
                       {/* Duration */}
-                      <div className="absolute bottom-2 right-2">
-                        <Badge
-                          variant="secondary"
-                          className="bg-black/80 text-white"
-                        >
-                          <Clock className="w-3 h-3 mr-1" />
-                          {video.duration}
-                        </Badge>
-                      </div>
-
-                      {/* Type */}
-                      <div className="absolute top-2 left-2">
-                        <Badge className={getTypeColor(video.type)}>
-                          {video.type}
-                        </Badge>
-                      </div>
+                      {video.duration && (
+                        <div className="absolute bottom-3 right-3">
+                          <Badge
+                            variant="secondary"
+                            className="bg-black/90 text-white border-0 shadow-lg"
+                          >
+                            <Clock className="w-3 h-3 mr-1" />
+                            {video.duration}
+                          </Badge>
+                        </div>
+                      )}
                     </div>
 
-                    <CardContent className="p-6 space-y-3">
-                      <h3 className="text-lg font-semibold line-clamp-2 group-hover:text-primary transition-colors">
+                    <CardContent className="p-6 space-y-4 flex-1 flex flex-col">
+                      <h3 className="text-lg font-semibold line-clamp-2 group-hover:text-primary transition-colors leading-tight">
                         {video.title}
                       </h3>
 
-                      <div className="flex items-center justify-between text-sm text-muted-foreground">
-                        <div className="flex items-center space-x-4">
-                          <div className="flex items-center space-x-1">
-                            <Eye className="w-4 h-4" />
-                            <span>{video.views} views</span>
-                          </div>
-                          <span>{video.uploadDate}</span>
-                        </div>
+                      {/* Upload date */}
+                      <div className="text-sm text-muted-foreground">
+                        <span>{video.uploadDate}</span>
+                      </div>
+
+                      {/* Description preview - always takes up space */}
+                      <div className="flex-1">
+                        <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed min-h-[2.5rem]">
+                          {video.description
+                            ? truncateDescription(video.description)
+                            : ""}
+                        </p>
                       </div>
                     </CardContent>
                   </Card>
@@ -173,8 +252,8 @@ const YouTubeSection = () => {
             </CarouselContent>
 
             {/* Navigation arrows positioned over content */}
-            <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/60 hover:bg-black/80 border-white/20 text-white shadow-lg" />
-            <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/60 hover:bg-black/80 border-white/20 text-white shadow-lg" />
+            <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/60 hover:bg-black/80 border-white/20 text-white shadow-lg w-12 h-12 md:w-14 md:h-14 [&>svg]:w-6 [&>svg]:h-6 md:[&>svg]:w-8 md:[&>svg]:h-8" />
+            <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/60 hover:bg-black/80 border-white/20 text-white shadow-lg w-12 h-12 md:w-14 md:h-14 [&>svg]:w-6 [&>svg]:h-6 md:[&>svg]:w-8 md:[&>svg]:h-8" />
           </Carousel>
         </div>
 
@@ -183,7 +262,14 @@ const YouTubeSection = () => {
           <Button
             size="lg"
             variant="outline"
-            className="border-border text-foreground hover:bg-secondary/50 subtle-shadow"
+            className="border-border cursor-pointer text-foreground hover:bg-secondary/50 subtle-shadow transition-all duration-300"
+            onClick={() =>
+              window.open(
+                "https://www.youtube.com/GroundZero0",
+                "_blank",
+                "noopener,noreferrer"
+              )
+            }
           >
             <ExternalLink className="w-5 h-5 mr-2" />
             View All Videos on YouTube
