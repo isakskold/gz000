@@ -12,11 +12,12 @@ const HeroSection = () => {
           <div className="space-y-8">
             <div className="space-y-4">
               <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
-                Pro <span className="gradient-text">Rocket League</span> Content
+                <span className="gradient-text">GroundZero000</span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-md">
-                Watch high-level gameplay, tutorials, and competitive matches.
-                Join thousands of viewers climbing the ranks together.
+                Professional Rocket League caster, content creator, and
+                streamer. Experience top-tier gameplay analysis, live tournament
+                casting, and entertaining community streams.
               </p>
             </div>
 

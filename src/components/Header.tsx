@@ -20,10 +20,9 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center">
-              <span className="text-background font-bold text-lg">P</span>
-            </div>
-            <span className="text-2xl font-bold gradient-text">ProRL</span>
+            <span className="text-2xl font-bold gradient-text">
+              GroundZero000
+            </span>
           </div>
 
           {/* Desktop Navigation */}
