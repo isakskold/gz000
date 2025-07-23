@@ -4,7 +4,7 @@ import { Gamepad2, Mail, MessageCircle } from "lucide-react";
 
 const AboutSection = () => {
   return (
-    <section id="about" className="py-16 px-4">
+    <section id="about" className="py-16 px-4 bg-secondary-section">
       <div className="container mx-auto">
         {/* Section Header */}
         <div className="text-center space-y-4 mb-16">

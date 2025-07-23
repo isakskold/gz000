@@ -32,6 +32,10 @@
     --ring: 204 30% 35%;
 
     --radius: 0.5rem;
+
+    /* Section background colors */
+    --primary-bg: 220 45% 8%; /* Dark navy blue */
+    --secondary-bg: 220 35% 12%; /* Lighter navy blue */
   }
 
   body {
@@ -109,6 +113,15 @@
 
   .hover\:text-accent-foreground:hover {
     color: hsl(var(--foreground)) !important;
+  }
+
+  /* Section background utilities */
+  .bg-primary-section {
+    background-color: hsl(var(--primary-bg));
+  }
+
+  .bg-secondary-section {
+    background-color: hsl(var(--secondary-bg));
   }
 }
 

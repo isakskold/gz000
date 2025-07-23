@@ -69,7 +69,7 @@ const LeaderboardSection = () => {
   };
 
   return (
-    <section id="leaderboard" className="py-16 px-4 bg-secondary/30">
+    <section id="leaderboard" className="py-16 px-4 bg-primary-section">
       <div className="container mx-auto">
         {/* Section Header */}
         <div className="text-center space-y-4 mb-12">
