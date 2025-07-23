@@ -124,9 +124,15 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-slate-700 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="flex items-center space-x-1 text-gray-300 text-sm">
-            <span>Made with</span>
-            <Heart className="w-4 h-4 text-red-500" />
-            <span>for the Rocket League community</span>
+            <span>Designed & developed by</span>
+            <a
+              href="https://isakskold.xyz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sky-400 hover:text-sky-300 transition-colors font-medium"
+            >
+              Isak Sköld
+            </a>
           </div>
           <div className="text-gray-300 text-sm">
             © 2024 GroundZero000. All rights reserved.
