@@ -20,24 +20,6 @@ const HeroSection = () => {
                 casting, and entertaining community streams.
               </p>
             </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                size="lg"
-                className="bg-primary hover:bg-primary/90 subtle-shadow"
-              >
-                <Play className="w-5 h-5 mr-2" />
-                Watch Live Stream
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-border text-foreground hover:bg-secondary/50 subtle-shadow"
-              >
-                View YouTube Channel
-              </Button>
-            </div>
           </div>
 
           {/* Right Content - Twitch Stream Embed */}
