@@ -26,7 +26,7 @@ const AboutSection = () => {
         {/* Section Header */}
         <div className="text-center space-y-4 mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold">
-            About <span className="gradient-text">ProRL</span>
+            About <span className="gradient-text">GroundZero000</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Rocket League caster, content creator, and community builder
