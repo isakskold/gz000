@@ -29,9 +29,10 @@ const AboutSection = () => {
             About <span className="gradient-text">ProRL</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Passionate Rocket League content creator dedicated to helping
-            players improve their skills through high-quality tutorials,
-            gameplay analysis, and entertaining streams.
+            Rocket League caster, content creator, and community builder
+            bringing you exciting gameplay, insightful commentary, and a
+            welcoming space for players of all skill levels to connect and
+            improve together.
           </p>
         </div>
 
