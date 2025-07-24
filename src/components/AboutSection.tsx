@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Gamepad2, Mail, MessageCircle } from "lucide-react";
+import { Gamepad2, Mail } from "lucide-react";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -66,7 +66,7 @@ const AboutSection = () => {
 
                 <p className="text-muted-foreground">
                   Want to collaborate, ask questions, or just chat about Rocket
-                  League? I'd love to hear from you!
+                  League? I&apos;d love to hear from you!
                 </p>
 
                 <div className="space-y-4">

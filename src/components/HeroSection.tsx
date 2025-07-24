@@ -1,8 +1,3 @@
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Play, Users, Eye, Clock } from "lucide-react";
-
 const HeroSection = () => {
   return (
     <section id="stream" className="pt-24 pb-16 px-4 bg-primary-section">

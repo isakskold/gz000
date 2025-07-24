@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Twitch, Youtube, Twitter, Instagram, Mail, Heart } from "lucide-react";
+import { Twitch, Youtube, Twitter, Instagram, Mail } from "lucide-react";
 
 const Footer = () => {
   const socialLinks = [

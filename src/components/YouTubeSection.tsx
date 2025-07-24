@@ -10,7 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Play, Eye, Clock, ExternalLink } from "lucide-react";
+import { Play, Clock, ExternalLink } from "lucide-react";
 import { useState, useEffect } from "react";
 import { YouTubeVideo } from "@/lib/youtube";
 
