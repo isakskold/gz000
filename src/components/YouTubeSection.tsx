@@ -30,46 +30,6 @@ const YouTubeSection = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Fallback static data in case API fails
-  const fallbackVideos: VideoDisplayData[] = [
-    {
-      id: "1",
-      title: "How I Hit Grand Champion in 1v1s - Complete Guide",
-      thumbnail:
-        "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&h=400&fit=crop",
-      duration: "15:42",
-      uploadDate: "3 days ago",
-      videoId: "example1",
-      url: "https://youtube.com/watch?v=example1",
-      description:
-        "In this comprehensive tutorial, I'll show you exactly how I climbed from Diamond to Grand Champion in 1v1s. Learn the key mechanics, positioning strategies, and mental approach that will transform your gameplay.",
-    },
-    {
-      id: "2",
-      title: "INSANE Ceiling Shot Compilation - Best Goals of 2024",
-      thumbnail:
-        "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?w=600&h=400&fit=crop",
-      duration: "8:34",
-      uploadDate: "1 week ago",
-      videoId: "example2",
-      url: "https://youtube.com/watch?v=example2",
-      description:
-        "A compilation of the most incredible ceiling shots and aerial plays from my recent ranked sessions. These clips showcase advanced mechanics and creativity in Rocket League.",
-    },
-    {
-      id: "3",
-      title: "Analyzing Pro Player Gameplay - What Makes Them Different",
-      thumbnail:
-        "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=600&h=400&fit=crop",
-      duration: "12:18",
-      uploadDate: "2 weeks ago",
-      videoId: "example3",
-      url: "https://youtube.com/watch?v=example3",
-      description:
-        "Breaking down professional Rocket League gameplay to understand the subtle differences that separate pros from casual players. Learn their decision-making process and positioning.",
-    },
-  ];
-
   useEffect(() => {
     const fetchVideos = async () => {
       try {
@@ -91,13 +51,12 @@ const YouTubeSection = () => {
           );
           setVideos(formattedVideos);
         } else {
-          console.warn("No videos returned from API, using fallback data");
-          setVideos(fallbackVideos);
+          console.warn("No videos returned from API");
+          setError("No videos available");
         }
       } catch (err) {
         console.error("Error fetching YouTube videos:", err);
         setError("Failed to load videos");
-        setVideos(fallbackVideos);
       } finally {
         setLoading(false);
       }
@@ -157,6 +116,40 @@ const YouTubeSection = () => {
     );
   }
 
+  if (error || videos.length === 0) {
+    return (
+      <section id="videos" className="py-16 px-4 bg-secondary-section">
+        <div className="container mx-auto">
+          <div className="text-center space-y-4 mb-12">
+            <h2 className="text-4xl lg:text-5xl font-bold">
+              Latest <span className="gradient-text">YouTube</span> Videos
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              {error || "No videos available at the moment"}
+            </p>
+            <div className="text-center">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-border cursor-pointer text-foreground hover:bg-secondary/50 subtle-shadow transition-all duration-300"
+                onClick={() =>
+                  window.open(
+                    "https://www.youtube.com/GroundZero0",
+                    "_blank",
+                    "noopener,noreferrer"
+                  )
+                }
+              >
+                <ExternalLink className="w-5 h-5 mr-2" />
+                Visit YouTube Channel
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="videos" className="py-16 px-4 bg-secondary-section">
       <div className="container mx-auto">
@@ -170,11 +163,6 @@ const YouTubeSection = () => {
             videos covering everything from casual matches to competitive
             casting
           </p>
-          {error && (
-            <p className="text-sm text-yellow-500">
-              Using cached content - {error}
-            </p>
-          )}
         </div>
 
         {/* Videos Carousel */}
