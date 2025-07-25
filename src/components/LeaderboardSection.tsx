@@ -36,7 +36,7 @@ const LeaderboardSection = () => {
             1v1 <span className="gradient-text">Leaderboard</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Tracking player performance from 1v1 showmatches on my stream
+            Tracking player performance from my hosted 1v1 showmatches
           </p>
           <div className="flex justify-center">
             <Star className="w-6 h-6 text-yellow-400 mx-1 animate-pulse" />

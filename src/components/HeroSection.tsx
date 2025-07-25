@@ -71,9 +71,9 @@ const HeroSection = () => {
                 <span className="gradient-text">GroundZero000</span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-md">
-                Professional Rocket League caster, content creator, and
-                streamer. Experience top-tier gameplay analysis, live tournament
-                casting, and entertaining community streams.
+                Rocket League caster, content creator, and streamer. Experience
+                top-tier gameplay, live tournament casting, and entertaining
+                community streams.
               </p>
             </div>
             <div className="flex space-x-2">
