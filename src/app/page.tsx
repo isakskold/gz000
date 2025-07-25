@@ -1,43 +1,20 @@
-import DiscordButton from "@/components/DiscordButton";
-import Image from "next/image";
+import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
+import YouTubeSection from "@/components/YouTubeSection";
+import LeaderboardSection from "@/components/LeaderboardSection";
+import AboutSection from "@/components/AboutSection";
+import Footer from "@/components/Footer";
 
-type Props = Record<string, never>;
-
-const page: React.FC<Props> = () => {
+const page = () => {
   return (
-    <div className="w-full flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] px-4">
-      <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 w-full max-w-[800px]">
-        <Image
-          src="/pngs/whiteLogoShadowed.png"
-          alt="Shadowed Logo"
-          width={300}
-          height={300}
-          className="h-auto w-[clamp(10rem,8rem+5vw,18.75rem)]"
-          style={{
-            filter:
-              "drop-shadow(0 0 20px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 10px rgba(0, 0, 0, 0.7))",
-          }}
-        />
-
-        <div
-          className="flex flex-col items-center gap-4 text-white text-stroke"
-          style={{
-            filter:
-              "drop-shadow(0 0 20px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 10px rgba(0, 0, 0, 0.7))",
-          }}
-        >
-          <h1 className="typewriter font-oxanium text-[clamp(2rem,1.5rem+2vw,4.5rem)] font-bold tracking-widest text-center">
-            GroundZero000
-          </h1>
-          <h2 className="font-rajdhani text-center text-[clamp(1.25rem,1rem+1vw,2.5rem)] tracking-wider">
-            Welcome to my website!
-          </h2>
-        </div>
-      </div>
-
-      {/* Discord Button */}
-      <div className="mt-12">
-        <DiscordButton />
+    <div className="min-h-screen bg-slate-900">
+      <Header />
+      <div className="pt-17">
+        <HeroSection />
+        <YouTubeSection />
+        <LeaderboardSection />
+        <AboutSection />
+        <Footer />
       </div>
     </div>
   );

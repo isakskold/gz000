@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Twitch, Youtube, Mail } from "lucide-react";
-import Image from "next/image";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -27,7 +26,7 @@ const DiscordIcon = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-const Footer = () => {
+const HeroSection = () => {
   const socialLinks = [
     {
       name: "Twitch",
@@ -61,81 +60,57 @@ const Footer = () => {
     },
   ];
 
-  const quickLinks = [
-    { name: "Live Stream", href: "#stream" },
-    { name: "Latest Videos", href: "#videos" },
-    { name: "Leaderboard", href: "#leaderboard" },
-    { name: "About", href: "#about" },
-  ];
-
   return (
-    <footer className="bg-slate-900 border-t border-slate-700">
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-          {/* Brand */}
-          <div className="flex items-center space-x-2">
-            <Image
-              src="/pngs/whiteLogoShadowed.png"
-              alt="GroundZero000 Logo"
-              width={32}
-              height={32}
-            />
-            <span className="text-2xl font-bold gradient-text">
-              GroundZero000
-            </span>
+    <section id="stream" className="pt-24 pb-16 px-4 bg-primary-section">
+      <div className="container mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Content */}
+          <div className="space-y-8">
+            <div className="space-y-4">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight break-all">
+                <span className="gradient-text">GroundZero000</span>
+              </h1>
+              <p className="text-xl text-muted-foreground max-w-md">
+                Rocket League caster, content creator, and streamer. Experience
+                top-tier gameplay, live tournament casting, and entertaining
+                community streams.
+              </p>
+            </div>
+            <div className="flex space-x-2">
+              {socialLinks.map((link) => (
+                <Button
+                  key={link.name}
+                  variant="ghost"
+                  size="icon"
+                  asChild
+                  className={`hover:bg-slate-700 ${link.color} transition-colors rounded-full`}
+                >
+                  <a href={link.url} target="_blank" rel="noopener noreferrer">
+                    <link.icon className="w-5 h-5" />
+                  </a>
+                </Button>
+              ))}
+            </div>
           </div>
 
-          {/* Quick Links */}
-          <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-            {quickLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-gray-300 hover:text-white transition-colors"
-              >
-                {link.name}
-              </a>
-            ))}
-          </nav>
-
-          {/* Social Links */}
-          <div className="flex space-x-2">
-            {socialLinks.map((link) => (
-              <Button
-                key={link.name}
-                variant="ghost"
-                size="icon"
-                asChild
-                className={`hover:bg-slate-700 ${link.color} transition-colors rounded-full`}
-              >
-                <a href={link.url} target="_blank" rel="noopener noreferrer">
-                  <link.icon className="w-5 h-5" />
-                </a>
-              </Button>
-            ))}
-          </div>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="mt-8 pt-8 border-t border-slate-700 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <div className="flex items-center space-x-1 text-gray-300 text-sm">
-            <span>Designed & Developed by</span>
-            <a
-              href="https://isakskold.xyz"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sky-400 hover:text-sky-300 transition-colors font-medium"
-            >
-              Isak Sköld
-            </a>
-          </div>
-          <div className="text-gray-300 text-sm">
-            © 2024 GroundZero000. All rights reserved.
+          {/* Right Content - Twitch Stream Embed */}
+          <div className="relative">
+            <div className="overflow-hidden rounded-lg border border-border/30 subtle-shadow-lg">
+              <iframe
+                src={`https://player.twitch.tv/?channel=groundzero000&parent=${process.env.TWITCH_PARENT_WEBSITE}`}
+                frameBorder="0"
+                allowFullScreen={true}
+                scrolling="no"
+                height="378"
+                width="100%"
+                className="w-full"
+              />
+            </div>
           </div>
         </div>
       </div>
-    </footer>
+    </section>
   );
 };
 
-export default Footer;
+export default HeroSection;
