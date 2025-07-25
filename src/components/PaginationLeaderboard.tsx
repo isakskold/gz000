@@ -74,7 +74,7 @@ export const PaginationLeaderboard = ({
   return (
     <div className="space-y-4">
       {/* Header with Title and Page Info */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <Trophy className="w-10 h-10 text-yellow-400" />
           <h3 className="text-3xl font-bold">Current Rankings</h3>
@@ -99,22 +99,22 @@ export const PaginationLeaderboard = ({
                 animationDelay: `${index * 100}ms`,
               }}
             >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-6">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="w-full sm:flex-grow flex items-center justify-start gap-4 min-w-0">
                   {getRankIcon(position)}
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-                    <span
-                      className={`font-bold ${
+                  <div className="min-w-0 flex-1">
+                    <p
+                      className={`font-bold truncate ${
                         position <= 3 ? "text-2xl" : "text-xl"
                       }`}
                     >
                       {player.name}
-                    </span>
+                    </p>
                   </div>
                 </div>
-                <div className="text-right flex flex-col items-end gap-2">
+                <div className="flex items-center justify-start sm:justify-end gap-3 w-full sm:w-auto">
                   <div
-                    className={`font-bold ${
+                    className={`font-bold sm:text-right ${
                       position <= 3
                         ? "text-4xl text-primary"
                         : "text-3xl text-primary"
@@ -122,7 +122,9 @@ export const PaginationLeaderboard = ({
                   >
                     {player.wins}
                   </div>
-                  <div className="text-sm text-muted-foreground">wins</div>
+                  <div className="text-sm text-muted-foreground w-12 text-left">
+                    wins
+                  </div>
                 </div>
               </div>
             </div>
@@ -138,12 +140,12 @@ export const PaginationLeaderboard = ({
       {/* Pagination Controls */}
       {hasMultiplePages && (
         <div className="pt-4 border-t border-border/30">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <Button
               variant="outline"
               onClick={goToPreviousPage}
               disabled={currentPage === 1}
-              className="flex items-center gap-2"
+              className="w-full sm:w-auto flex items-center gap-2"
             >
               <ChevronLeft className="w-4 h-4" />
               Previous
@@ -161,7 +163,7 @@ export const PaginationLeaderboard = ({
               variant="outline"
               onClick={goToNextPage}
               disabled={currentPage === totalPages}
-              className="flex items-center gap-2"
+              className="w-full sm:w-auto flex items-center gap-2"
             >
               Next
               <ChevronRight className="w-4 h-4" />
